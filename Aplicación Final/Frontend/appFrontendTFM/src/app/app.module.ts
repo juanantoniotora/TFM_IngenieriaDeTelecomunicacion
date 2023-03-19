@@ -23,6 +23,9 @@ import {MatButtonModule} from '@angular/material/button';
 import { CookieService } from 'ngx-cookie-service';
 import { GuardianSiNoLogeado } from './componentesIndependientes/login/guardian-si-no-logeado';
 
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 @NgModule({
   declarations: [
@@ -43,7 +46,8 @@ import { GuardianSiNoLogeado } from './componentesIndependientes/login/guardian-
     AngularFireModule.initializeApp(environment.firebaseConfig),
     BrowserAnimationsModule,
     MatMenuModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule
   ],
   providers: [CookieService, GuardianSiNoLogeado],
   bootstrap: [AppComponent]
