@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { Usuario } from '../dashboard/usuario';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
   loginUsuario : FormGroup;
 
   JWTUsuario : string = "";
+  correoUsuarioPelismiu : string = "";
 
   constructor(
     private fb: FormBuilder,
@@ -46,7 +48,7 @@ export class LoginComponent implements OnInit {
     const password = this.loginUsuario.value.password;
     this.loading = true;
     this.afAuth.signInWithEmailAndPassword(email, password).then((user)=>{
-      //console.log(user)
+      console.log(user)
       if(user.user?.emailVerified){
         /**
          * Recuperamos el JWT del usuario, recien conseguido al iniciar sesión
@@ -56,8 +58,8 @@ export class LoginComponent implements OnInit {
           console.log("Propiedad <JWTUsuario> antes de salir de componente <login>: \n" + this.JWTUsuario);
           
           this.cookie.set("JWT_PelisMiu", this.JWTUsuario);
-          const a = this.cookie.get("JWT_PelisMiu");
-          console.log("\n\nValor de la cookie antes de salir del componente <login>: " + a)
+          const jwtCookie = this.cookie.get("JWT_PelisMiu");
+          console.log("\n\nValor de la cookie antes de salir del componente <login>: " + jwtCookie)
           
           this.router.navigate(['/dashboard']);
         });
