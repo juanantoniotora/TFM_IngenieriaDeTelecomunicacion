@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-root',
@@ -8,20 +11,26 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'appFrontend';
 
+
+  loading : boolean = false;
+  mostrarMensajeErrorRegistro : boolean = false;
+  mostrarMensajeExitoRegistro : boolean = false;
+  mensajeInfo : String = "";
+  loginUsuario : FormGroup;
+  JWTUsuario : string = "";
+  correoUsuarioPelismiu : string = "";
   datosEnviadosAlHijoCompApp:String     = "Datos del Comp.Padre enviados y escritos en el Comp.Hijo.";
   datosRecibidosDelHijoCompApp:String   = "";
 
-
-
-  
-  /** Constructor de la clase 
-   * Para declaraciones globales de la clase y supervariables.
-   * Desde el constructor de clase no podremos acceder a los elementos del componente.
-  */
-  constructor(){
-    console.log("1) Constructor de la clase");
+  constructor(
+    private afAuth : AngularFireAuth,
+    private fb: FormBuilder,
+    private router : Router  ) {
+    this.loginUsuario = this.fb.group({
+      email : ['', [Validators.required, Validators.email]],
+      password : ['', Validators.required],
+    });
   }
-
 
 /**********************************************************************************
     *** Funciones mientras se crea el componente ***
@@ -95,5 +104,53 @@ export class AppComponent {
   ngOnDestroy(): void {
     console.log("9) ngOnDestroy");
   }
+
+  
+  login(){
+    const email = this.loginUsuario.value.email;
+    const password = this.loginUsuario.value.password;
+    this.loading = true;
+    this.afAuth.signInWithEmailAndPassword(email, password).then((user)=>{
+      console.log(user)
+      if(user.user?.emailVerified){
+        /**
+         * Recuperamos el JWT del usuario, recien conseguido al iniciar sesión
+         */
+        user.user.getIdToken().then(token=>{
+          this.router.navigate(['/dashboard']);
+        });
+      }
+      else{
+        this.router.navigate(['/verificar-correo'])
+      }
+    }).catch((error)=>{
+      this.loading = false;
+      console.log('error');
+      this.loading=false;
+      this.mostrarMensajeErrorRegistro=true;
+      this.mostrarMensajeExitoRegistro=false;
+      this.mensajeInfo=this.firebaseError(error.code)
+    })
+  }
+
+  firebaseError(code:String){
+    switch(code){
+      // password invalida
+      case 'auth/invalid-password':
+        return 'Contraseña inválida'
+      // password incorrecta
+      case 'auth/wrong-password':
+        return 'Contraseña incorrecta'
+      // correo invalido
+      case 'auth/invalid-email':
+        return 'Correo inválido'
+      case 'auth/user-not-found':
+        return 'El usuario no existe'
+      // cualquier otro error no contemplado
+      default: 
+        return 'Email/Password incorrecto'
+    }
+  }
+
 }
 

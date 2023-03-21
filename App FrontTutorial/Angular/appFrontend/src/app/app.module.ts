@@ -11,6 +11,13 @@ import { SimulacionbbddService } from './simulacionbbdd.service';
 import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module'; 
 
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,8 +26,10 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [SimulacionbbddService],
   bootstrap: [AppComponent]
