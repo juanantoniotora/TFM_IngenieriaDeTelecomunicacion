@@ -61,6 +61,8 @@ export class LoginComponent implements OnInit {
           const jwtCookie = this.cookie.get("JWT_PelisMiu");
           console.log("\n\nValor de la cookie antes de salir del componente <login>: " + jwtCookie)
           
+          this.cookie.set("cookies_correoRegistrado_PelisMiu", email);
+
           this.router.navigate(['/dashboard']);
         });
       }

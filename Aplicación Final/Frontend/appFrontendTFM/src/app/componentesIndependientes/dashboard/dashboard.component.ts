@@ -24,6 +24,8 @@ export class DashboardComponent implements OnInit {
       this.usuarios = [new Usuario()];
      }
 
+  cookieCorreo = this.cookie.get("cookies_correoRegistrado_PelisMiu");
+
   ngOnInit(): void {
     console.log("\nValor rescatado de la cookie en el componente <Dashboard>: "+  this.cookie.get("JWT_PelisMiu"));
     this.servicioUsuariosService.getAll().subscribe(
@@ -38,6 +40,10 @@ export class DashboardComponent implements OnInit {
       this.cookie.set("JWT_PelisMiu","")
       console.log("\nValor de la cookie después de logout: "+this.cookie.get("JWT_PelisMiu"))
       console.log(this.usuarios)
+
+      //borrado de cookie del correo
+      this.cookie.set("cookies_correoRegistrado_PelisMiu", "");
+      
       this.router.navigate(["/login"])
     })
     .catch((error)=>{console.log("Error en LogOut")})
