@@ -34,7 +34,7 @@ public class FirebaseDemoServiceImpl implements FirebaseDemoService {
                 
                 usuario = doc.toObject(Usuario.class);
                 try{
-                    usuario.setId( Long.parseLong(doc.getId()) );
+                    usuario.setId( doc.getId().toString() );
                     response.add(usuario);
                 }
                 catch(Exception e) {

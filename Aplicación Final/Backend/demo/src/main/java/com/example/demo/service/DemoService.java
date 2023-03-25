@@ -31,7 +31,7 @@ public class DemoService {
     }
 
     // servicio CREATE
-    public Long crearUsuario(Usuario src){
+    public String crearUsuario(Usuario src){
         
         UsuariosEntity usuariosEntity = new UsuariosEntity();
 

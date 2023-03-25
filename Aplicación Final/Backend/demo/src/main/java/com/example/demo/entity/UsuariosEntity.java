@@ -11,7 +11,7 @@ public class UsuariosEntity {
     // fields, getters and setters
     @Id
     @GeneratedValue
-    public Long id;
+    public String id;
 
     private String nombre;
     private String apellidos;
@@ -27,7 +27,7 @@ public class UsuariosEntity {
     }
 
     // constructor parametrizado
-    public UsuariosEntity(Long id,  String nombre, String apellidos, Integer edad, 
+    public UsuariosEntity(String id,  String nombre, String apellidos, Integer edad, 
             boolean activado, Long telefono, int genero, String aficion) {
         this.id = id;
         this.nombre=nombre;
@@ -43,7 +43,7 @@ public class UsuariosEntity {
      * Method getter for the ID
      * @return the id
      */
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
@@ -52,7 +52,7 @@ public class UsuariosEntity {
      * @param id
      * @return void
      */
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

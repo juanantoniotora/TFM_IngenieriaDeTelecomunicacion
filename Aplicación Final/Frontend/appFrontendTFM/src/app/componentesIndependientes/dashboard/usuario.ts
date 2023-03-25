@@ -1,5 +1,5 @@
 export class Usuario {
-    id:number=0;
+    id:string="";
     nombre:string="";
     apellidos:string="";
     edad:number=0;

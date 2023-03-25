@@ -3,7 +3,7 @@ import java.io.Serializable;
 
 public class UsuarioDTO implements Serializable{
 
-    private Long id;
+    private String id;
     private String nombre;
     private String apellidos;
     private Integer edad;
@@ -16,7 +16,7 @@ public class UsuarioDTO implements Serializable{
      * Getter del ID
      * @return id
      */
-    public Long getId(){
+    public String getId(){
         return this.id;
     }
 
@@ -24,7 +24,7 @@ public class UsuarioDTO implements Serializable{
      * Setter del ID
      * @param id
      */
-    public void setId(Long id){
+    public void setId(String id){
         this.id= id;
     }
 
