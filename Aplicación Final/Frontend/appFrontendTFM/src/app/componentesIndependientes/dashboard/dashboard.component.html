@@ -6,23 +6,24 @@
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">Inventory</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">Customers</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">Products</a></li>
-            </ul>
+                <li><a href="#" class="nav-link px-2 link-secondary">Catálogo</a></li>
+                <li><a href="#" class="nav-link px-2 link-dark">Tendencias</a></li>
+                <li><a href="#" class="nav-link px-2 link-dark">Drama</a></li>
+                <li><a href="#" class="nav-link px-2 link-dark">Comedia</a></li>
+                <li><a href="#" class="nav-link px-2 link-dark">Acción</a></li>
+                <li><a href="#" class="nav-link px-2 link-dark">Series</a></li>
 
-            <form class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" role="search">
-                <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
-            </form>
+            </ul>
 
         
             <div class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center">
-                {{cookieCorreo}}
-                <!--<img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">-->
+                <strong>{{cookieCorreo}}</strong>
             </div>
 
-            <!--<button type="button" (click)="logout()">Logout</button> -->
+            <div class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center">
+                <img src="./../../../assets/RuedaConfiguracion.png" alt="mdo" width="32" height="32" class="rounded-circle">
+            </div>
+
             <button type="button" class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" mat-raised-button color="warn" (click)="logout()">LogOut</button>
         </div>
     </div>
