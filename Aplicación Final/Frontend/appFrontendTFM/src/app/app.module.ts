@@ -25,6 +25,13 @@ import { CookieService } from 'ngx-cookie-service';
 import { GuardianSiNoLogeado } from './componentesIndependientes/login/guardian-si-no-logeado';
 
 import { HttpClientModule } from '@angular/common/http';
+import { CatalogoComponent } from './componentesIndependientes/dashboard/catalogo/catalogo.component';
+import { TendenciasComponent } from './componentesIndependientes/dashboard/tendencias/tendencias.component';
+import { DramaComponent } from './componentesIndependientes/dashboard/drama/drama.component';
+import { ComediaComponent } from './componentesIndependientes/dashboard/comedia/comedia.component';
+import { AccionComponent } from './componentesIndependientes/dashboard/accion/accion.component';
+import { SeriesComponent } from './componentesIndependientes/dashboard/series/series.component';
+import { ConfiguracionComponent } from './componentesIndependientes/dashboard/configuracion/configuracion.component';
 
 
 
@@ -38,6 +45,13 @@ import { HttpClientModule } from '@angular/common/http';
     RegistrarUsuarioComponent,
     VerificarCorreoComponent,
     SpinnerComponent,
+    CatalogoComponent,
+    TendenciasComponent,
+    DramaComponent,
+    ComediaComponent,
+    AccionComponent,
+    SeriesComponent,
+    ConfiguracionComponent,
 
   ],
   imports: [
