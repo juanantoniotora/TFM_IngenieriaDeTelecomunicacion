@@ -8,7 +8,7 @@ public interface FirebaseDemoService {
     
     List<Usuario> listarUsuariosFirebase();
 
-    Long crearUsuarioFirebase(Usuario usuario);
+    String crearUsuarioFirebase(Usuario usuario);
 
     Boolean modificarUsuarioFirebase(String id, Usuario usuario);
 

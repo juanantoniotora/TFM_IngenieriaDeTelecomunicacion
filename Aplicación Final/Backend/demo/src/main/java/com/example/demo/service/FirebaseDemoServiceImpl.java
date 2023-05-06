@@ -50,20 +50,20 @@ public class FirebaseDemoServiceImpl implements FirebaseDemoService {
 
     // servicio CREATE
     @Override
-    public Long crearUsuarioFirebase(Usuario usuario) {
+    public String crearUsuarioFirebase(Usuario usuario) {
         Map<String, Object> documentoUsuarios = new HashMap<>();
         documentoUsuarios = obtenerUsuariosFirebase(usuario);
         Long datetime = System.currentTimeMillis();
-        Long idUsuarioNuevo = datetime;
+        String idUsuarioNuevo = "tora@gmail.com";
         ApiFuture<WriteResult> feature = obtenerColeccion().document(String.valueOf(idUsuarioNuevo)).create(documentoUsuarios);
         try{
             if(feature.get() !=null){
                 return idUsuarioNuevo;
             }
-            return (long)-1;
+            return "-1";
         }
         catch(Exception e){
-            return (long) -1;
+            return "-1";
         }
     }
 
@@ -123,7 +123,7 @@ public class FirebaseDemoServiceImpl implements FirebaseDemoService {
 
     // metodo interno 1: localiza referencia de mi collection Firebase
     private CollectionReference obtenerColeccion (){
-        return firebase.getFirestore().collection("usuarios-coleccion");
+        return firebase.getFirestore().collection("Usuarios");
     }
 
     // metodo interno 2: rellena el hashMap a partir del Usuario entrante y devuelve el hashMap completado

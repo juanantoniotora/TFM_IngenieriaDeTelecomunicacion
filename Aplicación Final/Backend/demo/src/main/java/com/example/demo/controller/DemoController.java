@@ -43,7 +43,7 @@ public class DemoController {
         
         Usuario usuario = this.usuarioMapper.comoUsuario(usuarioDTO, detalleUsuario);
         ///Long idNuevoUsuario = this.miServicio.crearUsuario(usuario);
-        Long response = miFirebaseDemoService.crearUsuarioFirebase(usuario);
+        String response = miFirebaseDemoService.crearUsuarioFirebase(usuario);
         ///return idNuevoUsuario;
         return new ResponseEntity(response, HttpStatus.OK );
     }
