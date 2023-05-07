@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     // Si estoy logeado no dejo ver este componente y me vuelvo al Dashboard
     if(this.cookie.get("JWT_PelisMiu")!=""){
-      this.router.navigate(["dashboard"])
+      this.router.navigate(["catalogo"])
     }
   }
 
@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
           
           this.cookie.set("cookies_correoRegistrado_PelisMiu", email);
 
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/catalogo']);
         });
       }
       else{

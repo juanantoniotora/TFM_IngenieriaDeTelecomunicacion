@@ -32,6 +32,7 @@ import { ComediaComponent } from './componentesIndependientes/dashboard/comedia/
 import { AccionComponent } from './componentesIndependientes/dashboard/accion/accion.component';
 import { SeriesComponent } from './componentesIndependientes/dashboard/series/series.component';
 import { ConfiguracionComponent } from './componentesIndependientes/dashboard/configuracion/configuracion.component';
+import { DashboardHeaderComponent } from './componentesIndependientes/dashboard/dashboard-header/dashboard-header.component';
 
 
 
@@ -52,6 +53,7 @@ import { ConfiguracionComponent } from './componentesIndependientes/dashboard/co
     AccionComponent,
     SeriesComponent,
     ConfiguracionComponent,
+    DashboardHeaderComponent,
 
   ],
   imports: [

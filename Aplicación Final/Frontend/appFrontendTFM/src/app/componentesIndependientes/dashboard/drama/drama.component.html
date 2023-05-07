@@ -1,11 +1,49 @@
-<body style="background-image: radial-gradient(circle at 50% -20.71%, #ade5ff 0, #7dcefb 25%, #3cb5f2 50%, #009ce9 75%, #0085e0 100%);">
-</body>
+<header style="background-image: linear-gradient(180deg, #9fb7f5 0, #6c90d8 50%, #2c6bbb 100%);" class="p-3 mb-3 border-bottom">
+    <mat-toolbar>  
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <img class="logo" style="display:flex; scale:0.4; padding-right: 3EM;" src="../../../assets/LogoPelismiu.png" alt="foto corporativa">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+                </a>
+                
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="/catalogo" class="nav-link px-2 link-secondary">Catálogo</a></li>
+                    <li><a href="/tendencias" class="nav-link px-2 link-dark">Tendencias</a></li>
+                    <li><a href="/drama" class="nav-link px-2 link-dark">Drama</a></li>
+                    <li><a href="/comedia" class="nav-link px-2 link-dark">Comedia</a></li>
+                    <li><a href="/accion" class="nav-link px-2 link-dark">Acción</a></li>
+                    <li><a href="/series" class="nav-link px-2 link-dark">Series</a></li>
 
+                </ul>
+                
+                <div style="padding-left: 3em;" class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center">
+                    <strong>{{cookieCorreo}}</strong>
+                </div>
 
-<footer>
+                <div class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center">
+                    <a href="/configuracion" class="nav-link px-2 link-dark">
+                        <img src="./../../../assets/RuedaConfiguracion.png" alt="mdo" width="32" height="32" class="rounded-circle"> 
+                    </a>
+                    
+                </div>
+                
+                <button type="button" class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" mat-raised-button color="warn" (click)="logout()">LogOut</button>
+                
+            </div>
+        </div>
+    </mat-toolbar>  
+</header>
+
+<body style="background-color: #3cb5f2 ;">
+    <tr *ngFor="let contenido of contenidos">
+        <th scope="row"> {{contenido.generosPertenece}}</th>
+        <td> {{contenido.nombre}}</td>
+    </tr>
+
     <mat-toolbar style="background-color: black; text-align: center; border:1px dotted #000; padding:8px;">  
         <span style="padding-left: 30px; color:white; align-content: center; align:center;">
             PelisMiu  -  WEB Trabajo Fin de Master en Ingeniería de Telecomunicación  -  Juan Antonio Tora Cánovas
         </span>
     </mat-toolbar>
-</footer>
+</body>
