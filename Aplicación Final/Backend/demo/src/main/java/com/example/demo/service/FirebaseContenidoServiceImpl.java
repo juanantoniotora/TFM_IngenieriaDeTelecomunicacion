@@ -55,8 +55,8 @@ public class FirebaseContenidoServiceImpl implements FirebaseContenidoService {
         try {
             for(DocumentSnapshot doc : querySnapshotApiFeature.get().getDocuments()){
                 contenido = doc.toObject(Contenido.class);
-                List<String> generosPertenece = Arrays.asList(contenido.getGenrosPertenece().split(","));
-                if(generosPertenece.contains("tendencias")){
+                List<String> generosPertenece = Arrays.asList(contenido.getGenerosPertenece().split(","));
+                if(generosPertenece.contains("tendencia")){
                     try{
                         contenido.setIdContenido( Integer.valueOf(doc.getId()) );
                         response.add(contenido);
@@ -81,7 +81,7 @@ public class FirebaseContenidoServiceImpl implements FirebaseContenidoService {
         try {
             for(DocumentSnapshot doc : querySnapshotApiFeature.get().getDocuments()){
                 contenido = doc.toObject(Contenido.class);
-                List<String> generosPertenece = Arrays.asList(contenido.getGenrosPertenece().split(","));
+                List<String> generosPertenece = Arrays.asList(contenido.getGenerosPertenece().split(","));
                 if(generosPertenece.contains("drama")){
                     try{
                         contenido.setIdContenido( Integer.valueOf(doc.getId()) );
@@ -107,7 +107,7 @@ public class FirebaseContenidoServiceImpl implements FirebaseContenidoService {
         try {
             for(DocumentSnapshot doc : querySnapshotApiFeature.get().getDocuments()){
                 contenido = doc.toObject(Contenido.class);
-                List<String> generosPertenece = Arrays.asList(contenido.getGenrosPertenece().split(","));
+                List<String> generosPertenece = Arrays.asList(contenido.getGenerosPertenece().split(","));
                 if(generosPertenece.contains("comedia")){
                     try{
                         contenido.setIdContenido( Integer.valueOf(doc.getId()) );
@@ -133,7 +133,7 @@ public class FirebaseContenidoServiceImpl implements FirebaseContenidoService {
         try {
             for(DocumentSnapshot doc : querySnapshotApiFeature.get().getDocuments()){
                 contenido = doc.toObject(Contenido.class);
-                List<String> generosPertenece = Arrays.asList(contenido.getGenrosPertenece().split(","));
+                List<String> generosPertenece = Arrays.asList(contenido.getGenerosPertenece().split(","));
                 if(generosPertenece.contains("accion")){
                     try{
                         contenido.setIdContenido( Integer.valueOf(doc.getId()) );
@@ -159,8 +159,8 @@ public class FirebaseContenidoServiceImpl implements FirebaseContenidoService {
         try {
             for(DocumentSnapshot doc : querySnapshotApiFeature.get().getDocuments()){
                 contenido = doc.toObject(Contenido.class);
-                List<String> generosPertenece = Arrays.asList(contenido.getGenrosPertenece().split(","));
-                if(generosPertenece.contains("series")){
+                List<String> tipoContenido = Arrays.asList(contenido.getTipoContenido().split(","));
+                if(tipoContenido.contains("serie")){
                     try{
                         contenido.setIdContenido( Integer.valueOf(doc.getId()) );
                         response.add(contenido);
@@ -182,8 +182,8 @@ public class FirebaseContenidoServiceImpl implements FirebaseContenidoService {
     @Override
     public String crearContenido(Contenido contenido) {
         Map<String, Object> documentoUsuarios = new HashMap<>();
-        documentoUsuarios = obtenerContenidosFirebase(contenido);
-        Long datetime = System.currentTimeMillis();
+        Long datetime = System.currentTimeMillis() / 1000;
+        documentoUsuarios = obtenerContenidosFirebase(contenido, datetime);
         ApiFuture<WriteResult> feature = obtenerColeccion().document(String.valueOf(datetime)).create(documentoUsuarios);
         try{
             if(feature.get() !=null){
@@ -208,13 +208,13 @@ public class FirebaseContenidoServiceImpl implements FirebaseContenidoService {
         return firebase.getFirestore().collection("Contenidos");
     }
 
-    private Map<String, Object> obtenerContenidosFirebase(Contenido contenido){
+    private Map<String, Object> obtenerContenidosFirebase(Contenido contenido, Long idContenido){
         Map<String, Object> documentoContenidosMap = new HashMap<>();
         documentoContenidosMap.put("nombre", contenido.getNombre());
         documentoContenidosMap.put("anho", contenido.getAnho());
         documentoContenidosMap.put("descripcion", contenido.getDescripcion());
-        documentoContenidosMap.put("genrosPertenece", contenido.getGenrosPertenece());
-        documentoContenidosMap.put("idContenido", contenido.getIdContenido());
+        documentoContenidosMap.put("generosPertenece", contenido.getGenerosPertenece());
+        documentoContenidosMap.put("idContenido", idContenido);
         documentoContenidosMap.put("linkVideo", contenido.getLinkVideo());
         documentoContenidosMap.put("nombre", contenido.getNombre());
         documentoContenidosMap.put("tipoContenido", contenido.getTipoContenido());

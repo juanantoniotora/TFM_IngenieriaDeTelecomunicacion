@@ -47,6 +47,51 @@ public class ContenidosController {
         return response;
     }
 
+    @GetMapping(value = "/tendencias" )
+    public ResponseEntity<List<Contenido>> mostrarTodosLosContenidosDeTendencias (){
+    
+        List<Contenido> contenidos = firebaseContenidoService.listarContenidosTendencias();
+        contenidos = firebaseContenidoService.ordenarListaContenidos(contenidos);
+        ResponseEntity response = new ResponseEntity(contenidos, HttpStatus.OK);
+        return response;
+    }
+
+    @GetMapping(value = "/drama" )
+    public ResponseEntity<List<Contenido>> mostrarTodosLosContenidosDeDrama (){
+    
+        List<Contenido> contenidos = firebaseContenidoService.listarContenidosDrama();
+        contenidos = firebaseContenidoService.ordenarListaContenidos(contenidos);
+        ResponseEntity response = new ResponseEntity(contenidos, HttpStatus.OK);
+        return response;
+    }
+
+    @GetMapping(value = "/comedia" )
+    public ResponseEntity<List<Contenido>> mostrarTodosLosContenidosDeComedia (){
+    
+        List<Contenido> contenidos = firebaseContenidoService.listarContenidosComedia();
+        contenidos = firebaseContenidoService.ordenarListaContenidos(contenidos);
+        ResponseEntity response = new ResponseEntity(contenidos, HttpStatus.OK);
+        return response;
+    }
+
+    @GetMapping(value = "/accion" )
+    public ResponseEntity<List<Contenido>> mostrarTodosLosContenidosDeAccion (){
+    
+        List<Contenido> contenidos = firebaseContenidoService.listarContenidosAcción();
+        contenidos = firebaseContenidoService.ordenarListaContenidos(contenidos);
+        ResponseEntity response = new ResponseEntity(contenidos, HttpStatus.OK);
+        return response;
+    }
+
+    @GetMapping(value = "/series" )
+    public ResponseEntity<List<Contenido>> mostrarTodosLosContenidosDeSeries(){
+    
+        List<Contenido> contenidos = firebaseContenidoService.listarContenidosSeries();
+        contenidos = firebaseContenidoService.ordenarListaContenidos(contenidos);
+        ResponseEntity response = new ResponseEntity(contenidos, HttpStatus.OK);
+        return response;
+    }
+
     // Llamada CREATE: crea un contenido, con llamada HTTP tipo POST.
     @PostMapping("/nuevoContenido")
     public ResponseEntity crearNuevoContenido (  @RequestBody ContenidoDTO contenidoDTO ){

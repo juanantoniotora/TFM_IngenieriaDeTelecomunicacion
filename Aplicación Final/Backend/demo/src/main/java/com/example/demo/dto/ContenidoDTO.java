@@ -5,7 +5,7 @@ public class ContenidoDTO implements Serializable{
 
     private Long anho;
     private String descripcion;
-    private String genrosPertenece;
+    private String generosPertenece;
     private Integer idContenido;
     private String linkVideo;
     private String nombre;
@@ -28,12 +28,12 @@ public class ContenidoDTO implements Serializable{
         this.descripcion= descripcion;
     }
     
-    public String getGenrosPertenece(){
-        return this.genrosPertenece;
+    public String getGenerosPertenece(){
+        return this.generosPertenece;
     }
 
-    public void setGenrosPertenece(String genrosPertenece){
-        this.genrosPertenece= genrosPertenece;
+    public void setGenerosPertenece(String generosPertenece){
+        this.generosPertenece= generosPertenece;
     }
 
     public Integer getIdContenido(){

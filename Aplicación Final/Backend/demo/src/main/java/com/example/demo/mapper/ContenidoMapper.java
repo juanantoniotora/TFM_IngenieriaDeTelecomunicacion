@@ -18,7 +18,7 @@ public class ContenidoMapper{
         Contenido contenido = new Contenido();
         contenido.setAnho(src.getAnho());
         contenido.setDescripcion(src.getDescripcion());
-        contenido.setGenrosPertenece(src.getGenrosPertenece());
+        contenido.setGenerosPertenece(src.getGenerosPertenece());
         contenido.setIdContenido(src.getIdContenido());
         contenido.setLinkVideo(src.getLinkVideo());
         contenido.setNombre(src.getNombre());
@@ -33,7 +33,7 @@ public class ContenidoMapper{
         ContenidoDTO contenidoDTO = new ContenidoDTO();
         contenidoDTO.setAnho(src.getAnho());
         contenidoDTO.setDescripcion(src.getDescripcion());
-        contenidoDTO.setGenrosPertenece(src.getGenrosPertenece());
+        contenidoDTO.setGenerosPertenece(src.getGenerosPertenece());
         contenidoDTO.setIdContenido(src.getIdContenido());
         contenidoDTO.setLinkVideo(src.getLinkVideo());
         contenidoDTO.setNombre(src.getNombre());
