@@ -1,0 +1,33 @@
+html, body {
+    min-height: 85.3%;
+}
+
+table{
+    table-layout: fixed;
+    width: 250px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+th, td {
+    /*border: 1px solid blue;*/
+    width: 300px;
+    word-wrap: break-word;
+}
+
+tr {
+    /*border: 1px solid blue;*/
+    height: 200px;
+    word-wrap: break-word;
+}
+
+.imagenesTabla{
+    width: 400px;
+    height: 400px;
+    scale: 3;
+}
