@@ -63,7 +63,8 @@ export class LoginComponent implements OnInit {
           
           this.cookie.set("cookies_correoRegistrado_PelisMiu", email);
 
-          this.router.navigate(['/catalogo']);
+          window.location.reload(); // va al Catalogo directamente por salt
+          //this.router.navigate(['/catalogo']);
         });
       }
       else{
