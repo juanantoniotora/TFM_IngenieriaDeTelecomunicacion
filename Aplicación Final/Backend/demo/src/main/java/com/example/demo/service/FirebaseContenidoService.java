@@ -13,6 +13,7 @@ public interface FirebaseContenidoService {
     List<Contenido> listarContenidosComedia();
     List<Contenido> listarContenidosAcción();
     List<Contenido> listarContenidosSeries();
+    Contenido conseguirDetallesContenidoSeleccionado(Long idContenidoSeleccionado);
     String crearContenido(Contenido contenido);
 
     List<Contenido> ordenarListaContenidos (List<Contenido> contenidos);

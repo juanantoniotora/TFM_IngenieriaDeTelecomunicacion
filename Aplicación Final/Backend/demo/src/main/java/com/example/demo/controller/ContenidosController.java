@@ -92,6 +92,12 @@ public class ContenidosController {
         return response;
     }
 
+    @GetMapping(value = "/detallesContenidoSeleccionado/{idContenidoSeleccionado}" )
+    public ResponseEntity<Contenido> mostrarDetallesContenidoSeleccionado(@PathVariable Long idContenidoSeleccionado){
+        Contenido contenido = firebaseContenidoService.conseguirDetallesContenidoSeleccionado(idContenidoSeleccionado);
+        return new ResponseEntity(contenido, HttpStatus.OK);
+    }
+
     // Llamada CREATE: crea un contenido, con llamada HTTP tipo POST.
     @PostMapping("/nuevoContenido")
     public ResponseEntity crearNuevoContenido (  @RequestBody ContenidoDTO contenidoDTO ){

@@ -33,7 +33,7 @@ public class FirebaseContenidoServiceImpl implements FirebaseContenidoService {
                 
                 contenido = doc.toObject(Contenido.class);
                 try{
-                    contenido.setIdContenido( Integer.valueOf(doc.getId()) );
+                    contenido.setIdContenido( Long.valueOf(doc.getId()) );
                     response.add(contenido);
                 }
                 catch(Exception e) {
@@ -58,7 +58,7 @@ public class FirebaseContenidoServiceImpl implements FirebaseContenidoService {
                 List<String> generosPertenece = Arrays.asList(contenido.getGenerosPertenece().split(","));
                 if(generosPertenece.contains("tendencia")){
                     try{
-                        contenido.setIdContenido( Integer.valueOf(doc.getId()) );
+                        contenido.setIdContenido( Long.valueOf(doc.getId()) );
                         response.add(contenido);
                     }
                     catch(Exception e) {
@@ -84,7 +84,7 @@ public class FirebaseContenidoServiceImpl implements FirebaseContenidoService {
                 List<String> generosPertenece = Arrays.asList(contenido.getGenerosPertenece().split(","));
                 if(generosPertenece.contains("drama")){
                     try{
-                        contenido.setIdContenido( Integer.valueOf(doc.getId()) );
+                        contenido.setIdContenido( Long.valueOf(doc.getId()) );
                         response.add(contenido);
                     }
                     catch(Exception e) {
@@ -110,7 +110,7 @@ public class FirebaseContenidoServiceImpl implements FirebaseContenidoService {
                 List<String> generosPertenece = Arrays.asList(contenido.getGenerosPertenece().split(","));
                 if(generosPertenece.contains("comedia")){
                     try{
-                        contenido.setIdContenido( Integer.valueOf(doc.getId()) );
+                        contenido.setIdContenido( Long.valueOf(doc.getId()) );
                         response.add(contenido);
                     }
                     catch(Exception e) {
@@ -136,7 +136,7 @@ public class FirebaseContenidoServiceImpl implements FirebaseContenidoService {
                 List<String> generosPertenece = Arrays.asList(contenido.getGenerosPertenece().split(","));
                 if(generosPertenece.contains("accion")){
                     try{
-                        contenido.setIdContenido( Integer.valueOf(doc.getId()) );
+                        contenido.setIdContenido( Long.valueOf(doc.getId()) );
                         response.add(contenido);
                     }
                     catch(Exception e) {
@@ -162,7 +162,7 @@ public class FirebaseContenidoServiceImpl implements FirebaseContenidoService {
                 List<String> tipoContenido = Arrays.asList(contenido.getTipoContenido().split(","));
                 if(tipoContenido.contains("serie")){
                     try{
-                        contenido.setIdContenido( Integer.valueOf(doc.getId()) );
+                        contenido.setIdContenido( Long.valueOf(doc.getId()) );
                         response.add(contenido);
                     }
                     catch(Exception e) {
@@ -173,6 +173,26 @@ public class FirebaseContenidoServiceImpl implements FirebaseContenidoService {
             return response;
         } 
         catch (Exception e) {
+            return null;
+        }
+    }
+
+
+    @Override
+    public Contenido conseguirDetallesContenidoSeleccionado(Long idContenidoSeleccionado){
+        Contenido response = new Contenido();
+        Contenido contenido;
+        ApiFuture<QuerySnapshot> querySnapshotApiFeature = obtenerColeccion().get();
+        try {
+            for(DocumentSnapshot doc : querySnapshotApiFeature.get().getDocuments()){
+                contenido = doc.toObject(Contenido.class);
+                Long p= contenido.getIdContenido();
+                if(p.longValue()==idContenidoSeleccionado.longValue()){
+                    return contenido;
+                }
+            }
+            return response;
+        }  catch (Exception e) {
             return null;
         }
     }
