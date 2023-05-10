@@ -33,6 +33,7 @@ import { AccionComponent } from './componentesIndependientes/dashboard/accion/ac
 import { SeriesComponent } from './componentesIndependientes/dashboard/series/series.component';
 import { ConfiguracionComponent } from './componentesIndependientes/dashboard/configuracion/configuracion.component';
 import { DashboardHeaderComponent } from './componentesIndependientes/dashboard/dashboard-header/dashboard-header.component';
+import { ContenidoSeleccionadoComponent } from './componentesIndependientes/dashboard/contenido-seleccionado/contenido-seleccionado.component';
 
 
 
@@ -54,7 +55,7 @@ import { DashboardHeaderComponent } from './componentesIndependientes/dashboard/
     SeriesComponent,
     ConfiguracionComponent,
     DashboardHeaderComponent,
-
+    ContenidoSeleccionadoComponent,
   ],
   imports: [
     BrowserModule,

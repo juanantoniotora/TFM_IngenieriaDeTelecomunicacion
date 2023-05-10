@@ -39,7 +39,13 @@ export class ServicioContenidosService {
   }
 
   getSeriesContenidos():Observable<Contenido[]>{
-    console.log("entro en el servicio getseriesContenidos");
+    console.log("entro en el servicio getSeriesContenidos");
     return this.http.get<Contenido[]>(this.url+"/contenidos/series");
   }
+
+  getDetallesContenidoSeleccionado( idContenidoSeleccionado: Number ):Observable<Contenido>{
+    console.log("entro en el servicio getDetallesContenidoSeleccionado");
+    return this.http.get<Contenido>(this.url+"/contenidos/detallesContenidoSeleccionado/"+idContenidoSeleccionado);
+  }
+
 }

@@ -16,6 +16,7 @@ import { DramaComponent } from './componentesIndependientes/dashboard/drama/dram
 import { SeriesComponent } from './componentesIndependientes/dashboard/series/series.component';
 import { TendenciasComponent } from './componentesIndependientes/dashboard/tendencias/tendencias.component';
 import { ConfiguracionComponent } from './componentesIndependientes/dashboard/configuracion/configuracion.component';
+import { ContenidoSeleccionadoComponent } from './componentesIndependientes/dashboard/contenido-seleccionado/contenido-seleccionado.component';
 
 const routes: Routes = [
   {path:'login',              component : LoginComponent},
@@ -30,6 +31,7 @@ const routes: Routes = [
   {path:'drama',              component : DramaComponent, canActivate:[GuardianSiNoLogeado]},
   {path:'series',             component : SeriesComponent, canActivate:[GuardianSiNoLogeado]},
   {path:'tendencias',         component : TendenciasComponent, canActivate:[GuardianSiNoLogeado]},
+  {path:'contenido-seleccionado', component : ContenidoSeleccionadoComponent, canActivate:[GuardianSiNoLogeado]},
   {path:'',                   redirectTo: '/catalogo', pathMatch: 'full'},
   {path :'**',                component : ErrorComponent}
 ]
