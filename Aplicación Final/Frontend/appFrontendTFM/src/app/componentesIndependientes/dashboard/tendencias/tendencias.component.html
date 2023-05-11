@@ -4,10 +4,12 @@
     <table>
         <tr>
             <td scope="row" *ngFor="let contenido of contenidos"> 
-                <img class="imagenesTabla" style=" scale:0.4; padding-right: 3EM;" src="{{'../../../assets/Carteleras/'+ contenido.idContenido + '.jpg'}}" alt="">
+                <a href="{{'/contenido-seleccionado?idContenidoSeleccionado='+contenido.idContenido+''}}" class="nav-link px-2 link-dark">
+                    <img class="imagenesTabla" style=" scale:0.4; padding-right: 3EM;" src="{{'../../../assets/Carteleras/'+ contenido.idContenido + '.jpg'}}" alt="">
+                </a>
             </td>
         </tr>
-    </table>
+    </table> 
 </body>
 
 <footer>
