@@ -3,4 +3,8 @@ export class ResponseString{
     
     constructor(){
     }
+
+    getResult(){
+        return this.result;
+    }
 }

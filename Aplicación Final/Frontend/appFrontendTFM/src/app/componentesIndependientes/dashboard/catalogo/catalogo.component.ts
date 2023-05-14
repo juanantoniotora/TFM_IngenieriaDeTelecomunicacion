@@ -6,7 +6,7 @@ import { ServicioUsuariosService } from '../servicio-usuarios.service';
 import { Contenido } from '../contenido';
 import { ServicioContenidosService } from '../servicio-contenidos.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { ContenidoDTO } from 'src/DTO/ContenidoDTO';
+//import { ContenidoDTO } from 'src/DTO/ContenidoDTO';
 import { ResponseString } from 'src/modelos/ResponseString';
 
 
@@ -34,22 +34,6 @@ export class CatalogoComponent {
     this.servicioContenidosService.getCatalogoContenidos().subscribe(
       data=>this.contenidos=data
     )
-//    this.servicioContenidosService.crearContenido(
-//      {
-//        "anho": 99999999999,
-//        "descripcion": "texto descripcion ejemplo",
-//        "generosPertenece": "comedia,accion,drama",
-//        "idContenido": 0,
-//        "linkVideo": "https://www.youtube.com/watch?v=yir9PZzlCKs",
-//        "nombre": "Dragon Ball Z",
-//        "tipoContenido": "ficcccccticio"
-//      }
-//      ).subscribe(
-//        data=>{
-//          this.responseString=data;
-//          console.log(data);
-//        }
-//      )
   }
 
 

@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Usuario } from '../../../modelos/usuario';
+import { ServicioUsuariosService } from '../dashboard/servicio-usuarios.service';
+import { ResponseString } from 'src/modelos/ResponseString';
 
 @Component({
   selector: 'app-login',
@@ -20,12 +22,16 @@ export class LoginComponent implements OnInit {
 
   JWTUsuario : string = "";
   correoUsuarioPelismiu : string = "";
+  jwtCookie:string="";
+
+  responseString: ResponseString;
 
   constructor(
     private fb: FormBuilder,
     private afAuth : AngularFireAuth,
     private router : Router,
-    private cookie : CookieService
+    private cookie : CookieService,
+    private servicioUsuariosService : ServicioUsuariosService
   ) {
     this.loginUsuario = this.fb.group({
       email : ['', [Validators.required, Validators.email]],
@@ -34,6 +40,7 @@ export class LoginComponent implements OnInit {
     this.loading = false;
     this.mostrarMensajeErrorRegistro = false;
     this.mensajeInfo = "";
+    this.responseString = new ResponseString;
    }
 
   ngOnInit(): void {
@@ -44,9 +51,23 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
+    // cargo variable del metodo
     const email = this.loginUsuario.value.email;
     const password = this.loginUsuario.value.password;
+    let existeUsuarioLocal = false;
     this.loading = true;
+
+    // Compruebo si el usuario utilizado existe en BBDD "Usuarios"
+    this.servicioUsuariosService.comprobarSiExisteUsuarioActual(email).subscribe(
+      data=>{
+        this.responseString=data
+        if(this.responseString.result==="true"){
+          existeUsuarioLocal=true;
+        }
+      }
+    )
+    
+    // intento realizar el login contra Firebase
     this.afAuth.signInWithEmailAndPassword(email, password).then((user)=>{
       console.log(user)
       if(user.user?.emailVerified){
@@ -54,18 +75,20 @@ export class LoginComponent implements OnInit {
          * Recuperamos el JWT del usuario, recien conseguido al iniciar sesión
          */
         user.user.getIdToken().then(token=>{
-          this.JWTUsuario = token;
-          console.log("Propiedad <JWTUsuario> antes de salir de componente <login>: \n" + this.JWTUsuario);
           
-          this.cookie.set("JWT_PelisMiu", this.JWTUsuario);
-          const jwtCookie = this.cookie.get("JWT_PelisMiu");
-          console.log("\n\nValor de la cookie antes de salir del componente <login>: " + jwtCookie)
-          
-          this.cookie.set("cookies_correoRegistrado_PelisMiu", email);
-
-          window.location.reload(); // va al Catalogo directamente por salt
-          //this.router.navigate(['/catalogo']);
+          if(existeUsuarioLocal==true){
+            this.JWTUsuario = token;          
+            this.cookie.set("JWT_PelisMiu", this.JWTUsuario);
+            this.jwtCookie = this.cookie.get("JWT_PelisMiu");
+            this.cookie.set("cookies_correoRegistrado_PelisMiu", email);
+            window.location.reload(); // va al Catalogo directamente por tener la cookie rellena
+            //this.router.navigate(['/catalogo']);
+          }
+          else{
+            window.location.reload(); // va solo a recargar el login porque la cookie esta vacia
+          }
         });
+        
       }
       else{
         this.router.navigate(['/verificar-correo'])

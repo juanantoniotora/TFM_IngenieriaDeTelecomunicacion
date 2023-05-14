@@ -7,12 +7,16 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.demo.firebase.FirebaseInitializer;
+import com.example.demo.model.ResponseString;
 import com.example.demo.model.Usuario;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
+import com.google.rpc.context.AttributeContext.Response;
+
+import org.apache.http.protocol.ResponseServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +49,36 @@ public class FirebaseUsuarioServiceImpl implements FirebaseUsuarioService {
         } 
         catch (Exception e) {
             return null;
+        }
+    }
+
+    @Override
+    public ResponseString probarSiExisteUsuarioFirebase(String idUsuarioActual) {
+        List<Usuario> response = new ArrayList<>();
+        Usuario usuario;
+        ResponseString result= new ResponseString();
+
+        ApiFuture<QuerySnapshot> querySnapshotApiFeature = obtenerColeccion().get();
+        try {
+            for(DocumentSnapshot doc : querySnapshotApiFeature.get().getDocuments()){
+                usuario = doc.toObject(Usuario.class);
+                try{
+                    usuario.setId( doc.getId().toString() );
+                } catch(Exception e) {
+                    e.getMessage();
+                }
+                if( idUsuarioActual.equals(usuario.getId()) ){
+                    result.setResult("true");
+                    break;
+                } else {
+                    result.setResult("false");
+                }
+            }
+            return result;
+        } 
+        catch (Exception e) {
+            result.setResult("false");
+            return result;
         }
     }
 

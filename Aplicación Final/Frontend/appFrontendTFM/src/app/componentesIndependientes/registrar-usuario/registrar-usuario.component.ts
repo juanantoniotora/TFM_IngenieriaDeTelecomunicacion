@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 //import { ToastrService } from 'ngx-toastr';
 import { Failure, NotFoundFailure } from './Failue';
 import { UnknownFailure } from  './Failue';
+import { ServicioUsuariosService } from '../dashboard/servicio-usuarios.service';
+import { ResponseString } from 'src/modelos/ResponseString';
 
 @Component({
   selector: 'app-registrar-usuario',
@@ -20,21 +22,24 @@ export class RegistrarUsuarioComponent implements OnInit {
   mostrarMensajeErrorRegistro : boolean = false;
   mensajeInfo : String = "";
   registrarUsuario : FormGroup;
+  responseString: ResponseString
 
   constructor(
     private fb: FormBuilder,
     private afAuth : AngularFireAuth,
-    private router : Router
+    private router : Router,
+    private servicioUsuariosService : ServicioUsuariosService
   ) {
     this.registrarUsuario = this.fb.group({
       email : ['', [Validators.required, Validators.email]],
       password : ['', [Validators.required, Validators.minLength(6)]],
       repetirPassword : ['', Validators.required],
-    })
+    });
     this.loading = false;
     this.mostrarMensajeExitoRegistro = false;
     this.mostrarMensajeErrorRegistro = false;
     this.mensajeInfo = "";
+    this.responseString = new ResponseString;
    }
 
 
@@ -68,7 +73,24 @@ export class RegistrarUsuarioComponent implements OnInit {
     else{
       //crear usuario con email y password
       this.afAuth.createUserWithEmailAndPassword(email, password).then(async (user) => {
-        this.enviarCorreoVerificacion()
+        this.enviarCorreoVerificacion();
+        this.servicioUsuariosService.crearUsuario(
+          {
+            "nombre": "",
+            "apellidos":"",
+            "edad":0,
+            "activado":false,
+            "telefono":null,
+            "genero": 0,
+            "id": email
+          },
+          email
+        ).subscribe(
+        data=>{
+          this.responseString=data;
+          console.log(data);
+        }
+      )
       }).catch(async (error) => {
         console.log(this.registrarUsuario)
         this.loading=true;

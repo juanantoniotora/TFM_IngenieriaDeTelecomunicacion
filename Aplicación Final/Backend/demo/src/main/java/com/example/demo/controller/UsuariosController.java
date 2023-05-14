@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.UsuarioDTO;
 import com.example.demo.mapper.UsuarioMapper;
+import com.example.demo.model.ResponseString;
 import com.example.demo.model.Usuario;
 import com.example.demo.service.FirebaseUsuarioService;
 
@@ -40,7 +41,7 @@ public class UsuariosController {
     }
 
     // Llamada READ: lee todos los usuarios, con llamada HTTP tipo GET.
-    @GetMapping
+    @GetMapping(value = "/allUsers" )
     public ResponseEntity<List<Usuario>> mostrarTodosLosUsuarios (@RequestParam String ordenadosPor){
         List<Usuario> usuarios = miFirebaseDemoService.listarUsuariosFirebase();
         usuarios = miFirebaseDemoService.ordenarListaUsuarios(usuarios, ordenadosPor);
@@ -48,8 +49,15 @@ public class UsuariosController {
         return response;
     }
 
+    // Llamada GET: devuelve obj ResponseString con "true"/"false" si existe o no el idUsuario
+    @GetMapping(value = "/existeUsuarioActual/{idUsuario}" )
+    public ResponseEntity existeUsuarioActual(@PathVariable String idUsuario){
+        ResponseString response = miFirebaseDemoService.probarSiExisteUsuarioFirebase(idUsuario);
+        return new ResponseEntity(response, HttpStatus.OK);
+    }
+
     // Llamada UPDATE: modifica un usuario con llamada HTTP tipo PUT.
-    @PutMapping("/modificarDetalleUsuario/{idUsuario}")
+    @PutMapping("/actualizarUsuario/{idUsuario}")
     public ResponseEntity<Void> modificarDetalleDeUsuario (@PathVariable String idUsuario,
                             @RequestBody UsuarioDTO usuarioDTO){
         Usuario usuario = this.usuarioMapper.comoUsuario(usuarioDTO);

@@ -101,7 +101,6 @@ public class ContenidosController {
     // Llamada CREATE: crea un contenido, con llamada HTTP tipo POST.
     @PostMapping("/nuevoContenido")
     public ResponseEntity crearNuevoContenido (  @RequestBody ContenidoDTO contenidoDTO ){
-        
         Contenido contenido = this.contenidoMapper.comoContenido(contenidoDTO);
         ResponseString response = firebaseContenidoService.crearContenido(contenido);
         return new ResponseEntity( response, HttpStatus.OK );
