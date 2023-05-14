@@ -32,10 +32,10 @@ public class UsuariosController {
     private UsuarioMapper usuarioMapper;                             // Componente sin constructor
 
     // Llamada CREATE: crea un usuario, con llamada HTTP tipo POST.
-    @PostMapping("crearusuario")
-    public ResponseEntity crearUsuario (@RequestBody UsuarioDTO usuarioDTO){
+    @PostMapping("crearusuario/{idNuevoUsuario}")
+    public ResponseEntity crearUsuario (@PathVariable String idNuevoUsuario, @RequestBody UsuarioDTO usuarioDTO){
         Usuario usuario = this.usuarioMapper.comoUsuario(usuarioDTO);
-        String response = miFirebaseDemoService.crearUsuarioFirebase(usuario);
+        String response = miFirebaseDemoService.crearUsuarioFirebase(usuario, idNuevoUsuario);
         return new ResponseEntity(response, HttpStatus.OK );
     }
 

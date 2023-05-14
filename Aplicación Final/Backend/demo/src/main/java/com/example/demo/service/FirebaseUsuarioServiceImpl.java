@@ -50,15 +50,14 @@ public class FirebaseUsuarioServiceImpl implements FirebaseUsuarioService {
 
     // servicio CREATE
     @Override
-    public String crearUsuarioFirebase(Usuario usuario) {
+    public String crearUsuarioFirebase(Usuario usuario, String idUsuario) {
         Map<String, Object> documentoUsuarios = new HashMap<>();
         documentoUsuarios = obtenerUsuariosFirebase(usuario);
         Long datetime = System.currentTimeMillis();
-        String idUsuarioNuevo = "toraS@gmail.com";
-        ApiFuture<WriteResult> feature = obtenerColeccion().document(String.valueOf(idUsuarioNuevo)).create(documentoUsuarios);
+        ApiFuture<WriteResult> feature = obtenerColeccion().document(String.valueOf(idUsuario)).create(documentoUsuarios);
         try{
             if(feature.get() !=null){
-                return idUsuarioNuevo;
+                return idUsuario;
             }
             return "-1";
         }
