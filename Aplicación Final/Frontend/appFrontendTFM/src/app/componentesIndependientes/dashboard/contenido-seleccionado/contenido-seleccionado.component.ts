@@ -29,7 +29,6 @@ export class ContenidoSeleccionadoComponent {
   
 
   ngOnInit(): void {
-    //console.log("\nValor rescatado de la cookie en el componente <Dashboard>: "+  this.cookie.get("JWT_PelisMiu"));
     this.servicioContenidosService.getDetallesContenidoSeleccionado(this.idContenidoSeleccionado).subscribe(
       e=>this.contenido=e
     )

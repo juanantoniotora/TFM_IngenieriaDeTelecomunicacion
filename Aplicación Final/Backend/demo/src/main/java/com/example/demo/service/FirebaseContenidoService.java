@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.List;
 
 import com.example.demo.model.Contenido;
+import com.example.demo.model.ResponseString;
 import com.example.demo.model.Usuario;
 
 public interface FirebaseContenidoService {
@@ -14,7 +15,7 @@ public interface FirebaseContenidoService {
     List<Contenido> listarContenidosAcción();
     List<Contenido> listarContenidosSeries();
     Contenido conseguirDetallesContenidoSeleccionado(Long idContenidoSeleccionado);
-    String crearContenido(Contenido contenido);
+    ResponseString crearContenido(Contenido contenido);
 
     List<Contenido> ordenarListaContenidos (List<Contenido> contenidos);
 }

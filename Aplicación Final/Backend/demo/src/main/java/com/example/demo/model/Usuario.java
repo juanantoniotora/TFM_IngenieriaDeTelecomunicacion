@@ -9,7 +9,6 @@ public class Usuario {
     private boolean activado;
     private Long telefono;
     private int genero;
-    private String aficion;
 
     /**
      * Getter del ID
@@ -121,21 +120,5 @@ public class Usuario {
      */
     public void setGenero(int genero){
         this.genero=genero;
-    }
-
-    /**
-     * Getter del AFICION
-     * @return genero
-     */
-    public String getAficion(){
-        return this.aficion;
-    }
-
-    /**
-     * Setter del AFICION
-     * @param aficion
-     */
-    public void setAficion(String aficion){
-        this.aficion=aficion;
     }
 }

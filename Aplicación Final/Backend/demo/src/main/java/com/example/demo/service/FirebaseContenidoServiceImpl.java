@@ -9,6 +9,7 @@ import java.util.Map;
 
 import com.example.demo.firebase.FirebaseInitializer;
 import com.example.demo.model.Contenido;
+import com.example.demo.model.ResponseString;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentSnapshot;
@@ -200,19 +201,23 @@ public class FirebaseContenidoServiceImpl implements FirebaseContenidoService {
 
     // servicio CREATE
     @Override
-    public String crearContenido(Contenido contenido) {
+    public ResponseString crearContenido(Contenido contenido) {
         Map<String, Object> documentoUsuarios = new HashMap<>();
         Long datetime = System.currentTimeMillis() / 1000;
         documentoUsuarios = obtenerContenidosFirebase(contenido, datetime);
         ApiFuture<WriteResult> feature = obtenerColeccion().document(String.valueOf(datetime)).create(documentoUsuarios);
+        ResponseString response= new ResponseString();
         try{
             if(feature.get() !=null){
-                return datetime.toString();
+                response.setResult(datetime.toString());
+                return response;
             }
-            return "-1";
+            response.setResult("-1");
+            return response;
         }
         catch(Exception e){
-            return "-1";
+            response.setResult("-1");
+            return response;
         }
     }
 

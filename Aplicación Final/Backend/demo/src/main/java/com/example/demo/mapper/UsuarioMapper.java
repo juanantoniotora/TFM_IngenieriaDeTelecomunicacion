@@ -14,14 +14,13 @@ public class UsuarioMapper{
      * @param aficion
      * @return obj. tipo Usuario
      */
-    public Usuario comoUsuario(UsuarioDTO src, String aficion) {
+    public Usuario comoUsuario(UsuarioDTO src) {
         
         if(src == null){
             return null;
         }
         Usuario usuario = new Usuario();
         usuario.setActivado(src.getActivado());
-        usuario.setAficion(aficion);
         usuario.setApellidos(src.getApellidos());
         usuario.setEdad(src.getEdad());
         usuario.setGenero(src.getGenero());
@@ -42,7 +41,6 @@ public class UsuarioMapper{
         }
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         usuarioDTO.setActivado(src.getActivado());
-        usuarioDTO.setAficion(src.getAficion());
         usuarioDTO.setApellidos(src.getApellidos());
         usuarioDTO.setEdad(src.getEdad());
         usuarioDTO.setGenero(src.getGenero());

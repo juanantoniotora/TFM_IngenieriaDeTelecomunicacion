@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class FirebaseDemoServiceImpl implements FirebaseDemoService {
+public class FirebaseUsuarioServiceImpl implements FirebaseUsuarioService {
 
     @Autowired
     private FirebaseInitializer firebase;
@@ -54,7 +54,7 @@ public class FirebaseDemoServiceImpl implements FirebaseDemoService {
         Map<String, Object> documentoUsuarios = new HashMap<>();
         documentoUsuarios = obtenerUsuariosFirebase(usuario);
         Long datetime = System.currentTimeMillis();
-        String idUsuarioNuevo = "tora@gmail.com";
+        String idUsuarioNuevo = "toraS@gmail.com";
         ApiFuture<WriteResult> feature = obtenerColeccion().document(String.valueOf(idUsuarioNuevo)).create(documentoUsuarios);
         try{
             if(feature.get() !=null){
@@ -135,7 +135,7 @@ public class FirebaseDemoServiceImpl implements FirebaseDemoService {
         documentoUsuariosMap.put("activado", usuario.getActivado());
         documentoUsuariosMap.put("telefono", usuario.getTelefono());
         documentoUsuariosMap.put("genero", usuario.getGenero());
-        documentoUsuariosMap.put("aficion", usuario.getAficion());
+        documentoUsuariosMap.put("id", usuario.getId());
         return documentoUsuariosMap;
     }
 }

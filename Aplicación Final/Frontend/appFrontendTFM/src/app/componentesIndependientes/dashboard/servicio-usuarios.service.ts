@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Usuario } from './usuario';
+import { Usuario } from 'src/modelos/usuario';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +20,5 @@ export class ServicioUsuariosService {
     console.log("entro en el servicio getAll");
     return this.http.get<Usuario[]>(this.url+"?ordenadosPor=edad");
   }
-  //createNewUser():String{
-  //  console.log("entro en el servicio creNewUser");
-  //  this.nombreNuevoUsuario:String = this.http.post(this.url+"/crearusuario/", Usuario);
-  //  return "";
-  //}
+
 }

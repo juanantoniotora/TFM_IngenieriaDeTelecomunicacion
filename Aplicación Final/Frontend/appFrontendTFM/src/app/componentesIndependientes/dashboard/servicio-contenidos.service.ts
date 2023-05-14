@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Usuario } from './usuario';
 import { Observable } from 'rxjs';
 import { Contenido } from './contenido';
+import { ResponseString } from 'src/modelos/ResponseString';
+import { ContenidoDTO } from 'src/DTO/ContenidoDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,10 @@ export class ServicioContenidosService {
   getDetallesContenidoSeleccionado( idContenidoSeleccionado: Number ):Observable<Contenido>{
     console.log("entro en el servicio getDetallesContenidoSeleccionado");
     return this.http.get<Contenido>(this.url+"/contenidos/detallesContenidoSeleccionado/"+idContenidoSeleccionado);
+  }
+
+  crearContenido(contenidoDTO:any): Observable<any> {
+    return this.http.post<ResponseString>(this.url+"/contenidos/nuevoContenido", contenidoDTO);
   }
 
 }

@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { Usuario } from '../dashboard/usuario';
+import { Usuario } from '../../../modelos/usuario';
 
 @Component({
   selector: 'app-login',

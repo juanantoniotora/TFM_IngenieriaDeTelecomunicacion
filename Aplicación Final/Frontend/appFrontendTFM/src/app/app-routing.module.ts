@@ -22,7 +22,6 @@ const routes: Routes = [
   {path:'login',              component : LoginComponent},
   {path:'signup',             component : RegistrarUsuarioComponent},
   {path:'recuperar-password', component: RecuperarPasswordComponent},
-  //{path:'dashboard',          component : DashboardComponent, canActivate:[GuardianSiNoLogeado]},
   {path:'verificar-correo',   component : VerificarCorreoComponent},
   {path:'accion',             component : AccionComponent, canActivate:[GuardianSiNoLogeado]},
   {path:'catalogo',           component : CatalogoComponent, canActivate:[GuardianSiNoLogeado]},

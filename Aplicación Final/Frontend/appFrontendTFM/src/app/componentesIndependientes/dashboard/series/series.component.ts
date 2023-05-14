@@ -27,7 +27,6 @@ export class SeriesComponent {
   cookieCorreo = this.cookie.get("cookies_correoRegistrado_PelisMiu");
 
   ngOnInit(): void {
-    console.log("\nValor rescatado de la cookie en el componente <Dashboard>: "+  this.cookie.get("JWT_PelisMiu"));
     this.servicioContenidosService.getSeriesContenidos().subscribe(
       e=>this.contenidos=e
     )
@@ -36,14 +35,10 @@ export class SeriesComponent {
 
   logout(){
     this.afAuth.signOut().then(()=>{
-      console.log("LogOut realizado.\n")
       this.cookie.set("JWT_PelisMiu","")
-      console.log("\nValor de la cookie después de logout: "+this.cookie.get("JWT_PelisMiu"))
-      console.log(this.contenidos)
-
+      
       //borrado de cookie del correo
       this.cookie.set("cookies_correoRegistrado_PelisMiu", "");
-      
       this.router.navigate(["/login"])
     })
     .catch((error)=>{console.log("Error en LogOut")})

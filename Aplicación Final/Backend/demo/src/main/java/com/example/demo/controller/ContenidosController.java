@@ -20,10 +20,10 @@ import com.example.demo.dto.UsuarioDTO;
 import com.example.demo.mapper.ContenidoMapper;
 import com.example.demo.mapper.UsuarioMapper;
 import com.example.demo.model.Contenido;
+import com.example.demo.model.ResponseString;
 import com.example.demo.model.Usuario;
-import com.example.demo.service.DemoService;
 import com.example.demo.service.FirebaseContenidoService;
-import com.example.demo.service.FirebaseDemoService;
+import com.example.demo.service.FirebaseUsuarioService;
 
 @RestController
 @RequestMapping("/contenidos")
@@ -103,7 +103,7 @@ public class ContenidosController {
     public ResponseEntity crearNuevoContenido (  @RequestBody ContenidoDTO contenidoDTO ){
         
         Contenido contenido = this.contenidoMapper.comoContenido(contenidoDTO);
-        String response = firebaseContenidoService.crearContenido(contenido);
+        ResponseString response = firebaseContenidoService.crearContenido(contenido);
         return new ResponseEntity( response, HttpStatus.OK );
     }
 

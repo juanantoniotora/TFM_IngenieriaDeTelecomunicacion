@@ -7,7 +7,6 @@ import { Contenido } from '../contenido';
 import { ServicioContenidosService } from '../servicio-contenidos.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-
 @Component({
   selector: 'app-tendencias',
   templateUrl: './tendencias.component.html',
@@ -27,7 +26,6 @@ export class TendenciasComponent {
   cookieCorreo = this.cookie.get("cookies_correoRegistrado_PelisMiu");
 
   ngOnInit(): void {
-    console.log("\nValor rescatado de la cookie en el componente <Dashboard>: "+  this.cookie.get("JWT_PelisMiu"));
     this.servicioContenidosService.getTendenciasContenidos().subscribe(
       e=>this.contenidos=e
     )
@@ -36,14 +34,10 @@ export class TendenciasComponent {
 
   logout(){
     this.afAuth.signOut().then(()=>{
-      console.log("LogOut realizado.\n")
       this.cookie.set("JWT_PelisMiu","")
-      console.log("\nValor de la cookie después de logout: "+this.cookie.get("JWT_PelisMiu"))
-      console.log(this.contenidos)
-
+      
       //borrado de cookie del correo
       this.cookie.set("cookies_correoRegistrado_PelisMiu", "");
-      
       this.router.navigate(["/login"])
     })
     .catch((error)=>{console.log("Error en LogOut")})

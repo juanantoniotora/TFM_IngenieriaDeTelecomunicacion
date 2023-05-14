@@ -6,6 +6,8 @@ import { ServicioUsuariosService } from '../servicio-usuarios.service';
 import { Contenido } from '../contenido';
 import { ServicioContenidosService } from '../servicio-contenidos.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { ContenidoDTO } from 'src/DTO/ContenidoDTO';
+import { ResponseString } from 'src/modelos/ResponseString';
 
 
 @Component({
@@ -15,6 +17,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 })
 export class CatalogoComponent {
   contenidos : Contenido[];
+  responseString: ResponseString;
 
   constructor(
      private afAuth : AngularFireAuth,
@@ -22,15 +25,31 @@ export class CatalogoComponent {
      private cookie : CookieService,
      private servicioContenidosService : ServicioContenidosService) { 
       this.contenidos = [new Contenido()];
+      this.responseString = new ResponseString;
      }
 
   cookieCorreo = this.cookie.get("cookies_correoRegistrado_PelisMiu");
 
   ngOnInit(): void {
-    console.log("\nValor rescatado de la cookie en el componente <Dashboard>: "+  this.cookie.get("JWT_PelisMiu"));
     this.servicioContenidosService.getCatalogoContenidos().subscribe(
-      e=>this.contenidos=e
+      data=>this.contenidos=data
     )
+//    this.servicioContenidosService.crearContenido(
+//      {
+//        "anho": 99999999999,
+//        "descripcion": "texto descripcion ejemplo",
+//        "generosPertenece": "comedia,accion,drama",
+//        "idContenido": 0,
+//        "linkVideo": "https://www.youtube.com/watch?v=yir9PZzlCKs",
+//        "nombre": "Dragon Ball Z",
+//        "tipoContenido": "ficcccccticio"
+//      }
+//      ).subscribe(
+//        data=>{
+//          this.responseString=data;
+//          console.log(data);
+//        }
+//      )
   }
 
 
