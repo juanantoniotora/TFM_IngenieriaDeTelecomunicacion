@@ -64,13 +64,11 @@ public class UsuariosController {
         Boolean b = miFirebaseDemoService.modificarUsuarioFirebase(idUsuario, usuario);
         if( b == true){
             return ResponseEntity.noContent().build();
-        }
-        else{
+        } else{
             ResponseEntity responseEntity = new ResponseEntity("Imposible actualizar, el elemento no existe.", 
                                                             HttpStatus.BAD_REQUEST);
             return responseEntity;
         }
-        
     }
 
     // Llamada DELETE: elimina un usuario con llamada HTTP tipo POST.
