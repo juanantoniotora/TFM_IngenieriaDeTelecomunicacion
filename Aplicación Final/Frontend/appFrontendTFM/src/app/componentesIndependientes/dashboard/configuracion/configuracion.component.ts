@@ -21,8 +21,27 @@ export class ConfiguracionComponent {
       this.usuario = new Usuario;
   }
 
+  ngOnInit(): void {
+    // recupero los datos del usuario almacenado en la cookie
+    this.servicioUsuariosService.recuperarUsuarioActual( this.email).subscribe( data => this.usuario=data )
+  }
+
+
+  // ACCIONES POR BOTÓN
+  // eliminar el usuario y la cuenta existente
   eliminarUsuario(){
-    this.servicioUsuariosService.eliminarUsuario(this.email).subscribe(data=>this.deleteConseguido = true)
+    this.servicioUsuariosService
+      .eliminarUsuario(this.email)
+        .subscribe(data=>
+          {
+            this.deleteConseguido = true
+            this.cookie.set("cookies_correoRegistrado_PelisMiu", "");
+            this.cookie.set("JWT_PelisMiu","");
+            this.email="";
+          }
+        )
+    // si ha eliminado usuario sale al LogIn, sino recarga Configuracion
+    window.location.reload();
   }
 
   actualizarUsuario(){
@@ -37,16 +56,4 @@ export class ConfiguracionComponent {
         "id": this.email
       }, this.email).subscribe()
   }
-
-  recuperarDatosDeUsuario(){
-    this.servicioUsuariosService.recuperarUsuarioActual(this.email).subscribe(
-      data=> 
-        {  
-          this.usuario=data
-          console.log(this.usuario)
-        }
-    )
-    
-  }
-
 }

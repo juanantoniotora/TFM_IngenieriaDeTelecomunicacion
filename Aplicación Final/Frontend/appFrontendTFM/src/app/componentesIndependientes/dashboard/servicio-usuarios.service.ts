@@ -44,7 +44,7 @@ export class ServicioUsuariosService {
   }
   
   // ELIMINAR USUARIO (no retorna nada OK 204)
-  eliminarUsuario(idUsuario:string): Observable<any> {
-    return this.http.post(this.url+"/usuarios/eliminarUsuario/"+idUsuario, {});
+  eliminarUsuario(id:string): Observable<any> {
+    return this.http.post(this.url+"/usuarios/eliminarUsuario/"+id, "");
   }
 }
