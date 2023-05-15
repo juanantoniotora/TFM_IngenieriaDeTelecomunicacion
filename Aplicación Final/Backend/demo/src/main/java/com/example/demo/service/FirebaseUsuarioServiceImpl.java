@@ -82,6 +82,25 @@ public class FirebaseUsuarioServiceImpl implements FirebaseUsuarioService {
         }
     }
 
+
+    @Override
+    public Usuario mostrarUsuarioActual(String idUsuario){
+        Usuario response = new Usuario();
+        Usuario usuario;
+        ApiFuture<QuerySnapshot> querySnapshotApiFeature = obtenerColeccion().get();
+        try {
+            for(DocumentSnapshot doc : querySnapshotApiFeature.get().getDocuments()){
+                usuario = doc.toObject(Usuario.class);
+                if(usuario.getId().equals(idUsuario)){
+                    return usuario;
+                }
+            }
+            return response;
+        }  catch (Exception e) {
+            return null;
+        }
+    }
+
     // servicio CREATE
     @Override
     public String crearUsuarioFirebase(Usuario usuario, String idUsuario) {

@@ -27,7 +27,7 @@ import com.example.demo.service.FirebaseUsuarioService;
 public class UsuariosController {
     
     @Autowired
-    private FirebaseUsuarioService miFirebaseDemoService;
+    private FirebaseUsuarioService firebaseUsuarioService;
 
     @Autowired
     private UsuarioMapper usuarioMapper;                             // Componente sin constructor
@@ -36,15 +36,15 @@ public class UsuariosController {
     @PostMapping("crearusuario/{idNuevoUsuario}")
     public ResponseEntity crearUsuario (@PathVariable String idNuevoUsuario, @RequestBody UsuarioDTO usuarioDTO){
         Usuario usuario = this.usuarioMapper.comoUsuario(usuarioDTO);
-        String response = miFirebaseDemoService.crearUsuarioFirebase(usuario, idNuevoUsuario);
+        String response = firebaseUsuarioService.crearUsuarioFirebase(usuario, idNuevoUsuario);
         return new ResponseEntity(response, HttpStatus.OK );
     }
 
     // Llamada READ: lee todos los usuarios, con llamada HTTP tipo GET.
     @GetMapping(value = "/allUsers" )
     public ResponseEntity<List<Usuario>> mostrarTodosLosUsuarios (@RequestParam String ordenadosPor){
-        List<Usuario> usuarios = miFirebaseDemoService.listarUsuariosFirebase();
-        usuarios = miFirebaseDemoService.ordenarListaUsuarios(usuarios, ordenadosPor);
+        List<Usuario> usuarios = firebaseUsuarioService.listarUsuariosFirebase();
+        usuarios = firebaseUsuarioService.ordenarListaUsuarios(usuarios, ordenadosPor);
         ResponseEntity response = new ResponseEntity(usuarios, HttpStatus.OK);
         return response;
     }
@@ -52,8 +52,15 @@ public class UsuariosController {
     // Llamada GET: devuelve obj ResponseString con "true"/"false" si existe o no el idUsuario
     @GetMapping(value = "/existeUsuarioActual/{idUsuario}" )
     public ResponseEntity existeUsuarioActual(@PathVariable String idUsuario){
-        ResponseString response = miFirebaseDemoService.probarSiExisteUsuarioFirebase(idUsuario);
+        ResponseString response = firebaseUsuarioService.probarSiExisteUsuarioFirebase(idUsuario);
         return new ResponseEntity(response, HttpStatus.OK);
+    }
+
+    
+    @GetMapping(value = "/usuarioActual/{idUsuario}" )
+    public ResponseEntity<Usuario> mostrarDetallesContenidoSeleccionado(@PathVariable String idUsuario){
+        Usuario usuarioActual = firebaseUsuarioService.mostrarUsuarioActual(idUsuario);
+        return new ResponseEntity(usuarioActual, HttpStatus.OK);
     }
 
     // Llamada UPDATE: modifica un usuario con llamada HTTP tipo PUT.
@@ -61,7 +68,7 @@ public class UsuariosController {
     public ResponseEntity<Void> modificarDetalleDeUsuario (@PathVariable String idUsuario,
                             @RequestBody UsuarioDTO usuarioDTO){
         Usuario usuario = this.usuarioMapper.comoUsuario(usuarioDTO);
-        Boolean b = miFirebaseDemoService.modificarUsuarioFirebase(idUsuario, usuario);
+        Boolean b = firebaseUsuarioService.modificarUsuarioFirebase(idUsuario, usuario);
         if( b == true){
             return ResponseEntity.noContent().build();
         } else{
@@ -74,7 +81,7 @@ public class UsuariosController {
     // Llamada DELETE: elimina un usuario con llamada HTTP tipo POST.
     @PostMapping("/eliminarUsuario/{id}")
     public ResponseEntity<Void> eliminarUsuario (@PathVariable String id){
-                Boolean b = miFirebaseDemoService.eliminarUsuarioPorIdFirebase(id);
+                Boolean b = firebaseUsuarioService.eliminarUsuarioPorIdFirebase(id);
         if (b != null){
             return ResponseEntity.noContent().build();
         }

@@ -11,6 +11,8 @@ public interface FirebaseUsuarioService {
 
     ResponseString probarSiExisteUsuarioFirebase(String idUsuusuarioActual);
 
+    Usuario mostrarUsuarioActual(String idUsuario);
+
     String crearUsuarioFirebase(Usuario usuario, String idUsuario);
 
     Boolean modificarUsuarioFirebase(String id, Usuario usuario);
