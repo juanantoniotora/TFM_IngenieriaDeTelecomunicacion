@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ServicioUsuariosService } from '../servicio-usuarios.service';
 import { CookieService } from 'ngx-cookie-service';
 import { elementAt } from 'rxjs';
+import { Usuario } from 'src/modelos/usuario';
 
 @Component({
   selector: 'app-configuracion',
@@ -13,38 +14,18 @@ import { elementAt } from 'rxjs';
 export class ConfiguracionComponent {
   email = this.cookie.get("cookies_correoRegistrado_PelisMiu");
   deleteConseguido = false;
-  
+  usuario : Usuario;
   
   constructor(private cookie : CookieService,
     private servicioUsuariosService : ServicioUsuariosService){
-
+      this.usuario = new Usuario;
   }
 
-
-
   eliminarUsuario(){
-    console.log("Eliminar usuario.")
-
-
-    this.servicioUsuariosService.eliminarUsuario(
-      {
-        "nombre": null,
-        "apellidos":null,
-        "edad":null,
-        "activado":null,
-        "telefono":null,
-        "genero": null,
-        "id": this.email
-      },
-      this.email
-    ).subscribe(
-      data=>this.deleteConseguido = true)
+    this.servicioUsuariosService.eliminarUsuario(this.email).subscribe(data=>this.deleteConseguido = true)
   }
 
   actualizarUsuario(){
-    console.log("Actualizar usuario.")
-
-
     this.servicioUsuariosService.actualizarUsuario(
       {
         "nombre": "juan antonio",
@@ -54,9 +35,18 @@ export class ConfiguracionComponent {
         "telefono":null,
         "genero": null,
         "id": this.email
-      },
-      this.email
-    ).subscribe(
-      data=>console.log("usuario actualizado") )
+      }, this.email).subscribe()
   }
+
+  recuperarDatosDeUsuario(){
+    this.servicioUsuariosService.recuperarUsuarioActual(this.email).subscribe(
+      data=> 
+        {  
+          this.usuario=data
+          console.log(this.usuario)
+        }
+    )
+    
+  }
+
 }

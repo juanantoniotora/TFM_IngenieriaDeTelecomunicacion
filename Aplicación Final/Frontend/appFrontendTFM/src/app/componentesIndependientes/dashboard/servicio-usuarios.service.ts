@@ -24,10 +24,13 @@ export class ServicioUsuariosService {
 
   // GET booleano (retornado con string)
   comprobarSiExisteUsuarioActual(idUsuario:string): Observable<ResponseString> {
-    console.log("pasa por aqui "+idUsuario);
     let urlFinal = this.url+"/usuarios/existeUsuarioActual/"+idUsuario;
-    console.log("la url final es: "+urlFinal)
     return this.http.get<ResponseString>(urlFinal);
+  }
+
+  // GET usuarioActual (retornado el model Usuario)
+  recuperarUsuarioActual(idUsuario:string): Observable<Usuario> {
+    return this.http.get<Usuario>(this.url+"/usuarios/usuarioActual/"+idUsuario);
   }
 
   // CREAR USUARIO NUEVO (retorna el id como string)
@@ -41,7 +44,7 @@ export class ServicioUsuariosService {
   }
   
   // ELIMINAR USUARIO (no retorna nada OK 204)
-  eliminarUsuario(usuarioDTO:any, idUsuario:string): Observable<any> {
-    return this.http.post(this.url+"/usuarios/eliminarUsuario/"+idUsuario, usuarioDTO);
+  eliminarUsuario(idUsuario:string): Observable<any> {
+    return this.http.post(this.url+"/usuarios/eliminarUsuario/"+idUsuario, {});
   }
 }
