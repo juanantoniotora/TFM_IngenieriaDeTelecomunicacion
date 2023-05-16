@@ -8,6 +8,16 @@
     actualizar usuario
 </button>
 
-
-
 <span> nombre usuario:  {{usuario.id}}</span>
+<br>
+
+
+<!-- Doble Data Biding conseguido con el ID (email) -->
+Nombre:             <input type="text" [(ngModel)]="form_nombre" #recogida_formNombre name="formNombre">
+Apellidos:          <input type="text" [(ngModel)]="form_apellidos" #recogida_formApellidos name="formApellidos">
+Edad:               <input type="text" [(ngModel)]="form_edad" #recogida_formEdad name="formEdad">
+Teléfono:           <input type="text" [(ngModel)]="form_telefono" #recogida_formTelefono name="formTelefono">
+Género:             <input type="text" [(ngModel)]="form_genero" #recogida_formGenero name="formGenero">
+Activo:             <input type="text" [(ngModel)]="form_activo" #recogida_formActivo name="formActivo">
+Email de usuario:   <input type="text" [(ngModel)]="form_id" #recogida_formId name="formId">
+

@@ -35,6 +35,8 @@ import { ConfiguracionComponent } from './componentesIndependientes/dashboard/co
 import { DashboardHeaderComponent } from './componentesIndependientes/dashboard/dashboard-header/dashboard-header.component';
 import { ContenidoSeleccionadoComponent } from './componentesIndependientes/dashboard/contenido-seleccionado/contenido-seleccionado.component';
 
+import { FormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -66,7 +68,8 @@ import { ContenidoSeleccionadoComponent } from './componentesIndependientes/dash
     MatMenuModule,
     MatButtonModule,
     MatToolbarModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [CookieService, GuardianSiNoLogeado],
   bootstrap: [AppComponent]

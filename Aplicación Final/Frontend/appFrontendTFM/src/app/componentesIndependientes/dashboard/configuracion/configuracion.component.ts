@@ -3,6 +3,7 @@ import { ServicioUsuariosService } from '../servicio-usuarios.service';
 import { CookieService } from 'ngx-cookie-service';
 import { elementAt } from 'rxjs';
 import { Usuario } from 'src/modelos/usuario';
+import { compileNgModule } from '@angular/compiler';
 
 @Component({
   selector: 'app-configuracion',
@@ -16,6 +17,15 @@ export class ConfiguracionComponent {
   deleteConseguido = false;
   usuario : Usuario;
   
+  form_activo = false;
+  form_apellidos="";
+  form_edad=0;
+  form_genero=0;
+  form_id="";
+  form_nombre="";
+  form_telefono=0;
+
+
   constructor(private cookie : CookieService,
     private servicioUsuariosService : ServicioUsuariosService){
       this.usuario = new Usuario;
@@ -23,7 +33,19 @@ export class ConfiguracionComponent {
 
   ngOnInit(): void {
     // recupero los datos del usuario almacenado en la cookie
-    this.servicioUsuariosService.recuperarUsuarioActual( this.email).subscribe( data => this.usuario=data )
+    this.servicioUsuariosService.recuperarUsuarioActual( this.email).subscribe( data => {
+      this.usuario=data;
+      console.log(this.usuario);
+      
+      this.form_activo    = this.usuario.activado;
+      this.form_apellidos  = this.usuario.apellidos;
+      this.form_edad      = this.usuario.edad;
+      this.form_genero    = this.usuario.genero;
+      this.form_id        = this.usuario.id;
+      this.form_nombre    = this.usuario.nombre;
+      this.form_telefono  = this.usuario.telefono;
+    })
+    
   }
 
 
@@ -47,13 +69,13 @@ export class ConfiguracionComponent {
   actualizarUsuario(){
     this.servicioUsuariosService.actualizarUsuario(
       {
-        "nombre": "juan antonio",
-        "apellidos":null,
-        "edad":120,
-        "activado":null,
-        "telefono":null,
-        "genero": null,
-        "id": this.email
+        "nombre": this.form_nombre,
+        "apellidos":this.form_apellidos,
+        "edad":this.form_edad,
+        "activado":this.form_activo,
+        "telefono":this.form_telefono,
+        "genero": this.form_genero,
+        "id": this.form_id,
       }, this.email).subscribe()
   }
 }
