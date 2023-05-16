@@ -1,23 +1,31 @@
-<p>configuracion works!</p>
+<body style="background-color: #cccccc; height: auto;">
+    <button (click)="eliminarUsuario()">
+        Eliminar Usuario
+    </button>
 
-<button (click)="eliminarUsuario()">
-    Eliminar Usuario
-</button>
+    <button (click)="actualizarUsuario()">
+        actualizar usuario
+    </button>
 
-<button (click)="actualizarUsuario()">
-    actualizar usuario
-</button>
-
-<span> nombre usuario:  {{usuario.id}}</span>
-<br>
+    <span> nombre usuario:  {{usuario.id}}</span>
+    <br>
 
 
-<!-- Doble Data Biding conseguido con el ID (email) -->
-Nombre:             <input type="text" [(ngModel)]="form_nombre" #recogida_formNombre name="formNombre">
-Apellidos:          <input type="text" [(ngModel)]="form_apellidos" #recogida_formApellidos name="formApellidos">
-Edad:               <input type="text" [(ngModel)]="form_edad" #recogida_formEdad name="formEdad">
-Teléfono:           <input type="text" [(ngModel)]="form_telefono" #recogida_formTelefono name="formTelefono">
-Género:             <input type="text" [(ngModel)]="form_genero" #recogida_formGenero name="formGenero">
-Activo:             <input type="text" [(ngModel)]="form_activo" #recogida_formActivo name="formActivo">
-Email de usuario:   <input type="text" [(ngModel)]="form_id" #recogida_formId name="formId">
+    <!-- Doble Data Biding conseguido con el ID (email) -->
+    Nombre:             <input type="text" [(ngModel)]="form_nombre" #recogida_formNombre name="formNombre">
+    Apellidos:          <input type="text" [(ngModel)]="form_apellidos" #recogida_formApellidos name="formApellidos">
+    Edad:               <input type="text" [(ngModel)]="form_edad" #recogida_formEdad name="formEdad">
+    Teléfono:           <input type="text" [(ngModel)]="form_telefono" #recogida_formTelefono name="formTelefono">
+    Género:             <input type="text" [(ngModel)]="form_genero" #recogida_formGenero name="formGenero">
+    Activo:             <input type="text" [(ngModel)]="form_activo" #recogida_formActivo name="formActivo">
+    Email de usuario:   <input type="text" [(ngModel)]="form_id" #recogida_formId name="formId">
 
+</body>
+
+<footer>
+    <mat-toolbar style="background-color: black; text-align: center; border:1px dotted #000; padding:8px;">  
+        <span style="padding-left: 30px; color:white; align-content: center; align:center;">
+            PelisMiu  -  WEB Trabajo Fin de Master en Ingeniería de Telecomunicación  -  Juan Antonio Tora Cánovas
+        </span>
+    </mat-toolbar>
+</footer>

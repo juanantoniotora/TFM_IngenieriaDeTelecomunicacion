@@ -2,23 +2,23 @@
     {{cookieCorreo}}
 </p>
 <header *ngIf="cookieCorreo!=''" style="display:contents; bootbackground-image: linear-gradient(180deg, #9fb7f5 0, #6c90d8 50%, #1a1e22 100%);" class="p-3 mb-3;">
-    <mat-toolbar style="background-image: linear-gradient(180deg, #9fb7f5 0, #6c90d8 50%, #1a1e22 100%);" class="p-3 mb-3;">  
-        <div class="container">
+    <mat-toolbar style="background-image: #2f2f2f;">  
+        <div class="container" style="color:#333333">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <img class="logo" style="display:flex; scale:0.4; padding-right: 3EM;" src="../../../assets/LogoPelismiu.png" alt="foto corporativa">
                 <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
                     <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
                 </a>       
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="/catalogo" class="nav-link px-2 link-dark">Catálogo</a></li>
-                    <li><a href="/tendencias" class="nav-link px-2 link-dark">Tendencias</a></li>
-                    <li><a href="/drama" class="nav-link px-2 link-dark">Drama</a></li>
-                    <li><a href="/comedia" class="nav-link px-2 link-dark">Comedia</a></li>
-                    <li><a href="/accion" class="nav-link px-2 link-dark">Acción</a></li>
-                    <li><a href="/series" class="nav-link px-2 link-dark">Series</a></li>
+                    <li><a href="/catalogo" class="nav-link px-2 link-dark"> <span style="color:#999999">Catálogo</span></a></li>
+                    <li><a href="/tendencias" class="nav-link px-2 link-dark"><span style="color:#999999">Tendencias</span></a></li>
+                    <li><a href="/drama" class="nav-link px-2 link-dark"><span style="color:#999999">Drama</span></a></li>
+                    <li><a href="/comedia" class="nav-link px-2 link-dark"><span style="color:#999999">Comedia</span></a></li>
+                    <li><a href="/accion" class="nav-link px-2 link-dark"><span style="color:#999999">Acción</span></a></li>
+                    <li><a href="/series" class="nav-link px-2 link-dark"><span style="color:#999999">Series</span></a></li>
                 </ul>  
                 <div style="padding-left: 3em;" class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center">
-                    <strong>{{cookieCorreo}}</strong>
+                    <strong style="padding-top: 0.5em;">{{cookieCorreo}}</strong>
                 </div>
                 <div class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center">
                     <a href="/configuracion" class="nav-link px-2 link-dark">
