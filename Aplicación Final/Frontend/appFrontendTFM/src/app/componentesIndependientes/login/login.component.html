@@ -1,35 +1,37 @@
-<div class="wrapper" style="background: #999999;">
-  <div *ngIf="!loading" class="body">
-        <img class="logo" style="border-radius: 80%" src="../../../assets/LogoPelismiu.png" alt="foto corporativa">
-        <h1>Login</h1>
-        <form (ngSubmit)="login()" [formGroup]="loginUsuario">
-          <span *ngIf="mostrarMensajeErrorRegistro" class="alert alert-danger">{{mensajeInfo}}</span>
-          <span *ngIf="mostrarMensajeExitoRegistro" class="alert alert-success">{{mensajeInfo}}</span>
-          <div class="form-floating mb-3">
-                <input type="email" formControlName="email" class="form-control" placeholder="name@example.com">
-                <label>Email</label>
-                <span *ngIf="loginUsuario.get('email')?.hasError('required') && loginUsuario.get('email')?.touched" class="text-danger errorLabel">
-                  El <strong>correo</strong> es requerido.
-                </span>
-                <span *ngIf="loginUsuario.get('email')?.hasError('email') && loginUsuario.get('email')?.touched" class="text-danger errorLabel">
-                  Formato del <strong>correo</strong> inválido.
-                </span>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="password" formControlName="password" class="form-control" placeholder="Password">
-                <label>Password</label>
-                <span *ngIf="loginUsuario.get('password')?.hasError('required') && loginUsuario.get('password')?.touched" class="text-danger errorLabel">
-                  La <strong>nueva contraseña</strong> es requerida.
-                </span>
-              </div>
-              <div class="d-grid gap-2">
-                <button  type="submit" class="btn btn-primary btn-lg" [disabled]="loginUsuario.invalid">Entrar</button>
-              </div>
-            <p class="mt-3">
-                ¿Aun no tienes cuenta? <a href="/signup">Registrarse</a>
-            </p>
-            <a class="mt-3" href="/recuperar-password"> Recuperar Contraseña</a>
-        </form>
-    </div>
-    <app-spinner *ngIf="loading"></app-spinner>
-</div>
+<body>
+  <div class="wrapper" style="background: #999999;">
+    <div *ngIf="!loading" class="body">
+          <img class="logo" style="border-radius: 80%" src="../../../assets/LogoPelismiu.png" alt="foto corporativa">
+          <h1>Login</h1>
+          <form (ngSubmit)="login()" [formGroup]="loginUsuario">
+            <span *ngIf="mostrarMensajeErrorRegistro" class="alert alert-danger">{{mensajeInfo}}</span>
+            <span *ngIf="mostrarMensajeExitoRegistro" class="alert alert-success">{{mensajeInfo}}</span>
+            <div class="form-floating mb-3">
+                  <input type="email" formControlName="email" class="form-control" placeholder="name@example.com">
+                  <label>Email</label>
+                  <span *ngIf="loginUsuario.get('email')?.hasError('required') && loginUsuario.get('email')?.touched" class="text-danger errorLabel">
+                    El <strong>correo</strong> es requerido.
+                  </span>
+                  <span *ngIf="loginUsuario.get('email')?.hasError('email') && loginUsuario.get('email')?.touched" class="text-danger errorLabel">
+                    Formato del <strong>correo</strong> inválido.
+                  </span>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="password" formControlName="password" class="form-control" placeholder="Password">
+                  <label>Password</label>
+                  <span *ngIf="loginUsuario.get('password')?.hasError('required') && loginUsuario.get('password')?.touched" class="text-danger errorLabel">
+                    La <strong>nueva contraseña</strong> es requerida.
+                  </span>
+                </div>
+                <div class="d-grid gap-2">
+                  <button  type="submit" class="btn btn-primary btn-lg" [disabled]="loginUsuario.invalid">Entrar</button>
+                </div>
+              <p class="mt-3">
+                  ¿Aun no tienes cuenta? <a href="/signup">Registrarse</a>
+              </p>
+              <a class="mt-3" href="/recuperar-password"> Recuperar Contraseña</a>
+          </form>
+      </div>
+      <app-spinner *ngIf="loading"></app-spinner>
+  </div>
+</body>

@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login(){
+  async login(){
     // cargo variable del metodo
     const email = this.loginUsuario.value.email;
     const password = this.loginUsuario.value.password;
@@ -67,6 +67,9 @@ export class LoginComponent implements OnInit {
       }
     )
     
+    // coloco retardo de 3 segundos y espera la ejecución hasta que termine el delay
+    await this.delay(3000);
+
     // intento realizar el login contra Firebase
     this.afAuth.signInWithEmailAndPassword(email, password).then((user)=>{
       console.log(user)
@@ -85,18 +88,20 @@ export class LoginComponent implements OnInit {
             //this.router.navigate(['/catalogo']);
           }
           else{
+            this.loading = false;
             window.location.reload(); // va solo a recargar el login porque la cookie esta vacia
           }
         });
         
       }
       else{
+        this.loading = false;
         this.router.navigate(['/verificar-correo'])
       }
     }).catch((error)=>{
       this.loading = false;
       console.log('error');
-      this.loading=false;
+      this.loading = false;
       this.mostrarMensajeErrorRegistro=true;
       this.mostrarMensajeExitoRegistro=false;
       this.mensajeInfo=this.firebaseError(error.code)
@@ -122,4 +127,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+  
 }
