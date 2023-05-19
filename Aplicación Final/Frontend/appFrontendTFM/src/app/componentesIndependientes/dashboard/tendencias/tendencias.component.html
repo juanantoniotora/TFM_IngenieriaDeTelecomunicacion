@@ -6,7 +6,7 @@
     <table>
         <tr>
             <td scope="row" *ngFor="let contenido of contenidos"> 
-                <a href="{{'/contenido-seleccionado?idContenidoSeleccionado='+contenido.idContenido+''}}" class="nav-link px-2 link-dark">
+                <a href="{{'/contenido-seleccionado?idContenidoSeleccionado='+contenido.idContenido+''}}">
                     <img class="imagenesTabla" style=" scale:0.4; padding-right: 3EM;" src="{{'../../../assets/Carteleras/'+ contenido.idContenido + '.jpg'}}" alt="">
                 </a>
             </td>
