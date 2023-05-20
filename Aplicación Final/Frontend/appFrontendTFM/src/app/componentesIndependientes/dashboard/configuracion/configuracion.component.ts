@@ -51,7 +51,7 @@ export class ConfiguracionComponent {
 
   // ACCIONES POR BOTÓN
   // eliminar el usuario y la cuenta existente
-  eliminarUsuario(){
+  async eliminarUsuario(){
     this.servicioUsuariosService
       .eliminarUsuario(this.email)
         .subscribe(data=>
@@ -62,6 +62,7 @@ export class ConfiguracionComponent {
             this.email="";
           }
         )
+        await this.delay(500);
     // si ha eliminado usuario sale al LogIn, sino recarga Configuracion
     window.location.reload();
   }
@@ -77,5 +78,9 @@ export class ConfiguracionComponent {
         "genero": this.form_genero,
         "id": this.form_id,
       }, this.email).subscribe()
+  }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 }

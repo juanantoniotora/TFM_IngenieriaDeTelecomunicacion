@@ -1,28 +1,88 @@
 <body style="background-color: #cccccc ; height: auto; text-align: center; padding-top: 1em; color: #000066;">
-    <H1>
+    
+
+    <H1 >
         <span> <strong>CONFIGURACIÓN </strong></span>
-    </H1>    
-    <button (click)="eliminarUsuario()">
-        Eliminar Usuario
-    </button>
+    </H1>  
+    <span>
+        <table style="position: relative; bottom: -40px; margin: auto;">
+            <tr>
+                <td scope="row"> 
+                    Usuario:
+                </td>
+                <td scope="row"> 
+                    {{usuario.id}}
+                </td>
+            </tr>
+            <tr>
+                <td scope="row"> 
+                    Nombre:
+                </td>
+                <td scope="row"> 
+                    <input type="text" [(ngModel)]="form_nombre" #recogida_formNombre name="formNombre">
+                </td>
+            </tr>
+            <tr>
+                <td scope="row"> 
+                    Apellidos:
+                </td>
+                <td scope="row"> 
+                    <input type="text" [(ngModel)]="form_apellidos" #recogida_formApellidos name="formApellidos">
+                </td>
+            </tr>
+            <tr>
+                <td scope="row"> 
+                    Edad:
+                </td>
+                <td scope="row"> 
+                    <input type="text" [(ngModel)]="form_edad" #recogida_formEdad name="formEdad">
+                </td>
+            </tr>
+            <tr>
+                <td scope="row"> 
+                    Teléfono:
+                </td>
+                <td scope="row"> 
+                    <input type="text" [(ngModel)]="form_telefono" #recogida_formTelefono name="formTelefono">
+                </td>
+            </tr>
+            <tr>
+                <td scope="row"> 
+                    Género:
+                </td>
+                <td scope="row"> 
+                    <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="form_genero">
+                        <mat-radio-button [value]="1">Masculino</mat-radio-button>
+                        <mat-radio-button style="padding-left:3em" [value]="2">Femenino</mat-radio-button> <br>
+                        <mat-radio-button [value]="3">Otro</mat-radio-button>
+                    </mat-radio-group>
+                </td>
+            </tr>
+            <tr>
+                <td scope="row"> 
+                    Activo:
+                </td>
+                <td scope="row"> 
+                    <input type="text" [(ngModel)]="form_activo" #recogida_formActivo name="formActivo">
+                </td>
+            </tr>
+            <tr>
+                <td scope="row" colspan="2" style="text-align: center; height: 60px !important;"> 
+                    <button mat-flat-button color="primary" (click)="actualizarUsuario()">
+                        Actualizar usuario
+                    </button> 
+                    <button mat-stroked-button color="basic" (click)="eliminarUsuario()">
+                        Eliminar cuenta
+                    </button>
+                </td>
+            </tr>
+        </table>
+        
 
-    <button (click)="actualizarUsuario()">
-        actualizar usuario
-    </button>
-
-    <span> nombre usuario:  {{usuario.id}}</span>
-    <br>
-
-
-    <!-- Doble Data Biding conseguido con el ID (email) -->
-    Nombre:             <input type="text" [(ngModel)]="form_nombre" #recogida_formNombre name="formNombre">
-    Apellidos:          <input type="text" [(ngModel)]="form_apellidos" #recogida_formApellidos name="formApellidos">
-    Edad:               <input type="text" [(ngModel)]="form_edad" #recogida_formEdad name="formEdad">
-    Teléfono:           <input type="text" [(ngModel)]="form_telefono" #recogida_formTelefono name="formTelefono">
-    Género:             <input type="text" [(ngModel)]="form_genero" #recogida_formGenero name="formGenero">
-    Activo:             <input type="text" [(ngModel)]="form_activo" #recogida_formActivo name="formActivo">
-    Email de usuario:   <input type="text" [(ngModel)]="form_id" #recogida_formId name="formId">
-
+        <br>
+        
+        
+    </span>
 </body>
 
 <footer>

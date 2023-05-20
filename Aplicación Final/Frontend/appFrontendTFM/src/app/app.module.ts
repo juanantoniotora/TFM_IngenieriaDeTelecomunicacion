@@ -20,6 +20,8 @@ import { environment } from 'src/environments/environment';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button'; 
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatRadioModule } from '@angular/material/radio'; 
+import { MatFormFieldModule } from '@angular/material/form-field'; 
 
 import { CookieService } from 'ngx-cookie-service';
 import { GuardianSiNoLogeado } from './componentesIndependientes/login/guardian-si-no-logeado';
@@ -68,6 +70,8 @@ import { FormsModule } from '@angular/forms';
     MatMenuModule,
     MatButtonModule,
     MatToolbarModule,
+    MatRadioModule,
+    MatFormFieldModule,
     HttpClientModule,
     FormsModule
   ],
