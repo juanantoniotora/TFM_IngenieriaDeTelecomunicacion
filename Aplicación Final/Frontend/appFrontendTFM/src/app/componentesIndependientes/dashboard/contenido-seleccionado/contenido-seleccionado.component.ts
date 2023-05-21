@@ -28,10 +28,18 @@ export class ContenidoSeleccionadoComponent {
   cookieCorreo = this.cookie.get("cookies_correoRegistrado_PelisMiu");
   
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.servicioContenidosService.getDetallesContenidoSeleccionado(this.idContenidoSeleccionado).subscribe(
       e=>this.contenido=e
     )
+    
+    // relacionado con el @angular/youtubeplayer
+    await this.delay(3000);
+    const tag = document.createElement('script');
+    
+    tag.src = 'https://www.youtube.com/iframe_api';
+    console.log(""+this.contenido.idContenido)
+    document.body.appendChild(tag);
   }
 
   logout(){
@@ -41,5 +49,10 @@ export class ContenidoSeleccionadoComponent {
       this.router.navigate(["/login"])
     })
     .catch((error)=>{console.log("Error en LogOut")})
+  }
+
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 }

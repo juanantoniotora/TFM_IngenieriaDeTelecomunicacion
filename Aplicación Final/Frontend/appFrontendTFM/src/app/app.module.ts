@@ -39,6 +39,7 @@ import { ContenidoSeleccionadoComponent } from './componentesIndependientes/dash
 
 import { FormsModule } from '@angular/forms';
 
+import {YouTubePlayerModule} from '@angular/youtube-player';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { FormsModule } from '@angular/forms';
     MatRadioModule,
     MatFormFieldModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    YouTubePlayerModule
   ],
   providers: [CookieService, GuardianSiNoLogeado],
   bootstrap: [AppComponent]
