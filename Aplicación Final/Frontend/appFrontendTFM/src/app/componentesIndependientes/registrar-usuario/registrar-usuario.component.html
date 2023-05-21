@@ -1,7 +1,7 @@
 <body>
     <div class="wrapper" style="background: #999999;">
         <div *ngIf="!loading" class="body">
-            <img class="logo" src="../../../assets/LogoPelismiu.png" alt="Login">
+            <img class="logo" style="border-radius: 80%" src="../../../assets/LogoPelismiu.png" alt="Login">
             <h1>Registro</h1>
             <form (ngSubmit)="registrarse()" [formGroup]="registrarUsuario">
                 <span *ngIf="mostrarMensajeErrorRegistro" class="alert alert-danger">{{mensajeInfo}}</span>
