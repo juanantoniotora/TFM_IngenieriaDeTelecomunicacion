@@ -16,7 +16,6 @@ public interface FirebaseContenidoService {
     List<Contenido> listarContenidosSeries();
     Contenido conseguirDetallesContenidoSeleccionado(Long idContenidoSeleccionado);
     ResponseString crearContenido(Contenido contenido);
-
     List<Contenido> ordenarListaContenidos (List<Contenido> contenidos);
 }
 

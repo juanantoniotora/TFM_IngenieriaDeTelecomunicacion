@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class FirebaseContenidoServiceImpl implements FirebaseContenidoService {
-
     @Autowired
     private FirebaseInitializer firebase;
     
@@ -220,7 +219,6 @@ public class FirebaseContenidoServiceImpl implements FirebaseContenidoService {
             return response;
         }
     }
-
 
     // metodo que ordena los Usuarios mostrados en operaciones GET HTTP, segun id, nombre o edad 
     @Override

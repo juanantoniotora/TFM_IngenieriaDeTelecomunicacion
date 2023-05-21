@@ -5,7 +5,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import com.example.demo.firebase.FirebaseInitializer;
 import com.example.demo.model.ResponseString;
 import com.example.demo.model.Usuario;
@@ -15,14 +14,12 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
 import com.google.rpc.context.AttributeContext.Response;
-
 import org.apache.http.protocol.ResponseServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class FirebaseUsuarioServiceImpl implements FirebaseUsuarioService {
-
     @Autowired
     private FirebaseInitializer firebase;
     
@@ -31,7 +28,6 @@ public class FirebaseUsuarioServiceImpl implements FirebaseUsuarioService {
     public List<Usuario> listarUsuariosFirebase() {
         List<Usuario> response = new ArrayList<>();
         Usuario usuario;
-
         ApiFuture<QuerySnapshot> querySnapshotApiFeature = obtenerColeccion().get();
         try {
             for(DocumentSnapshot doc : querySnapshotApiFeature.get().getDocuments()){
@@ -46,8 +42,7 @@ public class FirebaseUsuarioServiceImpl implements FirebaseUsuarioService {
                 }
             }
             return response;
-        } 
-        catch (Exception e) {
+        } catch (Exception e) {
             return null;
         }
     }
@@ -107,7 +102,8 @@ public class FirebaseUsuarioServiceImpl implements FirebaseUsuarioService {
         Map<String, Object> documentoUsuarios = new HashMap<>();
         documentoUsuarios = obtenerUsuariosFirebase(usuario);
         Long datetime = System.currentTimeMillis();
-        ApiFuture<WriteResult> feature = obtenerColeccion().document(String.valueOf(idUsuario)).create(documentoUsuarios);
+        ApiFuture<WriteResult> feature = obtenerColeccion().
+            document(String.valueOf(idUsuario)).create(documentoUsuarios);
         try{
             if(feature.get() !=null){
                 return idUsuario;

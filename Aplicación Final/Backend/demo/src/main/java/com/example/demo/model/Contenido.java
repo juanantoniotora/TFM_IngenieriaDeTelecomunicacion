@@ -10,7 +10,6 @@ public class Contenido {
     private String nombre;
     private String tipoContenido;
 
-    
     public Long getAnho(){
         return this.anho;
     }

@@ -8,12 +8,6 @@ import com.example.demo.model.Usuario;
 @Component
 public class UsuarioMapper{
 
-    /**
-     * Transforma un UsuarioDTO a Usuario
-     * @param src
-     * @param aficion
-     * @return obj. tipo Usuario
-     */
     public Usuario comoUsuario(UsuarioDTO src) {
         
         if(src == null){
@@ -30,11 +24,6 @@ public class UsuarioMapper{
         return usuario;
     }
 
-    /**
-     * Transforma un Usuario a UsuarioDTO
-     * @param src
-     * @return obj. tipo UsuarioDTO
-     */
     public UsuarioDTO comoUsuarioDTO(Usuario src) {
         if(src == null){
             return null;

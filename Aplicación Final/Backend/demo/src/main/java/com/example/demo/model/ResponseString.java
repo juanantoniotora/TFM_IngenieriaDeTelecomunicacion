@@ -11,6 +11,4 @@ public class ResponseString {
     public void setResult(String result){
         this.result= result;
     }
-
-    
 }
