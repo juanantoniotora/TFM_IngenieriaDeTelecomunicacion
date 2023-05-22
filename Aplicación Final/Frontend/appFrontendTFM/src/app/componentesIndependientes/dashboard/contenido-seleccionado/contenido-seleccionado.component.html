@@ -2,22 +2,39 @@
     <div class="container text-center mt-5"> 
         <div class="card" style="background-color: #cccccc;">
             <h1><strong class="mt-4"> Detalle del Contenido Seleccionado</strong></h1>
-            <div class="container mt-2">
-                <div class="row">
-                    <div class="col">
-                    </div>
+        </div>
+    </div>
+    <div class="container text-center mt-4"> 
+        <div style="background-color: #cccccc;">
+            <div class="container mt-3">
+                <div class="row" style="text-align: left;">
+                    <H2><b>{{contenido.nombre}}</b></H2>
                 </div>
             </div>
         </div>
     </div>
-    <youtube-player videoId="{{''+contenido.linkVideo+''}}"></youtube-player>
-    <span style="display: none;"></span>
-    Año: {{contenido.anho}}
-    <br>Descripción: {{contenido.descripcion}}
-    <br>Generos a los que pertenece: {{contenido.generosPertenece}}
-    <br>Id de contenido seleccionado: {{contenido.idContenido}}
-    <br>Link contenido Youtube: {{contenido.linkVideo}}
-    <br>Nombre: {{contenido.nombre}}
+    
+    <div class="container" style="padding-top: 3em;">
+        <youtube-player videoId="{{''+contenido.linkVideo+''}}"></youtube-player>
+    </div>
+    <div class="container text-center mt-3"> 
+        <div style="background-color: #cccccc;">
+            <div class="container mt-2">
+                <div class="row" style="text-align: left;">
+                    <span><b>Año:</b> {{contenido.anho}}</span>
+                </div>
+                <div class="row" style="text-align: left;">
+                    <span><b>Descripción:</b> {{contenido.descripcion}}</span>
+                </div>
+                <div class="row" style="text-align: left;">
+                    <span><b> </b></span>
+                </div>
+                <div class="row" style="text-align: left;">
+                    <span><b>Géneros a los que pertenece:</b> {{contenido.generosPertenece}}.</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 <footer>

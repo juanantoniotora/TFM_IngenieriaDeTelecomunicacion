@@ -34,7 +34,7 @@ export class ContenidoSeleccionadoComponent {
     )
     
     // relacionado con el @angular/youtubeplayer
-    await this.delay(3000);
+    //await this.delay(3000);
     const tag = document.createElement('script');
     
     tag.src = 'https://www.youtube.com/iframe_api';
