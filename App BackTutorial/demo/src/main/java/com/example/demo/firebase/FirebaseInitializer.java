@@ -20,11 +20,15 @@ public class FirebaseInitializer {
     @PostConstruct
     private void initFireStore() throws IOException{
         
-        InputStream serviceAccount = getClass().getClassLoader().getResourceAsStream("private-key-firestore.json");
+        InputStream serviceAccount = getClass().getClassLoader().getResourceAsStream(""
+            //"private-key-firestore.json"
+            );
         
         FirebaseOptions options = new FirebaseOptions.Builder()
         .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-        .setDatabaseUrl("https://fir-5db01.firebaseio.com/")
+        .setDatabaseUrl(""
+        //"https://fir-5db01.firebaseio.com/"
+        )
         .build();
 
         if(FirebaseApp.getApps().isEmpty()){
