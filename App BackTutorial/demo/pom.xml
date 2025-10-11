@@ -75,11 +75,14 @@
 		</dependency>
 
 		<!-- libreria para conectar con BBDD google Firebase - producto Cloud Firestore -->
-		<dependency>
+		<!--<dependency>
 			<groupId>com.google.firebase</groupId>
 			<artifactId>firebase-admin</artifactId>
 			<version>9.1.1</version>
-		  </dependency>
+		  </dependency>-->
+
+		  
+		<!-- Librerias de Logger no incluidas porque parece que las incluye SprintBoot-Starter -->
 
 	</dependencies>
 
@@ -89,6 +92,29 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			 <!-- Plugin JaCoCo -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.12</version>
+				<executions>
+				<execution>
+					<goals>
+					<goal>prepare-agent</goal>
+					</goals>
+				</execution>
+				<execution>
+					<id>report</id>
+					<phase>verify</phase>
+					<goals>
+					<goal>report</goal>
+					</goals>
+				</execution>
+				</executions>
+			</plugin>
+			
 		</plugins>
 	</build>
+	
 </project>

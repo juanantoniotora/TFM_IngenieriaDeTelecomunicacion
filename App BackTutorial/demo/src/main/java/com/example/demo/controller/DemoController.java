@@ -18,41 +18,51 @@ import com.example.demo.dto.UsuarioDTO;
 import com.example.demo.mapper.UsuarioMapper;
 import com.example.demo.model.Usuario;
 import com.example.demo.service.DemoService;
-import com.example.demo.service.FirebaseDemoService;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+//import com.example.demo.service.FirebaseDemoService;
 
 @RestController
 @RequestMapping("/")
 public class DemoController {
     
-    @Autowired
-    private DemoService miServicio;                                  // Servicio sin constructor
-    private DemoService miServicioConConstructor = new DemoService();// Servicio con constructor
+    final private Logger logger = LoggerFactory.getLogger(DemoController.class);
 
     @Autowired
-    private FirebaseDemoService miFirebaseDemoService;
+    DemoService miServicio;                                  // Servicio sin constructor
+    DemoService miServicioConConstructor = new DemoService();// Servicio con constructor
+
+    //@Autowired
+    //private FirebaseDemoService miFirebaseDemoService;
 
     @Autowired
-    private UsuarioMapper usuarioMapper;                             // Componente sin constructor
+    UsuarioMapper usuarioMapper;                             // Componente sin constructor
 
     // Llamada CREATE: crea un usuario, con llamada HTTP tipo POST.
     @PostMapping("crearusuario/{detalleUsuario}")
     public ResponseEntity crearUsuario (  @PathVariable String detalleUsuario, 
                                 @RequestBody UsuarioDTO usuarioDTO){
+
+        this.logger.info("INICIO [DemoController.crearUsuario] Creando usuario.");
         
         Usuario usuario = this.usuarioMapper.comoUsuario(usuarioDTO, detalleUsuario);
-        ///Long idNuevoUsuario = this.miServicio.crearUsuario(usuario);
-        Long response = miFirebaseDemoService.crearUsuarioFirebase(usuario);
-        ///return idNuevoUsuario;
-        return new ResponseEntity(response, HttpStatus.OK );
+        Long idNuevoUsuario = this.miServicio.crearUsuario(usuario);
+        //Long response = miFirebaseDemoService.crearUsuarioFirebase(usuario);
+        //return idNuevoUsuario;
+
+        this.logger.info("FIN [DemoController.crearUsuario] Creando usuario.");
+        return new ResponseEntity(idNuevoUsuario, HttpStatus.OK );
     }
 
     // Llamada READ: lee todos los usuarios, con llamada HTTP tipo GET.
     @GetMapping
     public ResponseEntity<List<Usuario>> mostrarTodosLosUsuarios (@RequestParam String ordenadosPor){
     
-        ///List<Usuario> usuarios = miServicio.devolverTodosLosUsuarios();
-        List<Usuario> usuarios = miFirebaseDemoService.listarUsuariosFirebase();
-        usuarios = miFirebaseDemoService.ordenarListaUsuarios(usuarios, ordenadosPor);
+        List<Usuario> usuarios = miServicio.devolverTodosLosUsuarios();
+        ///List<Usuario> usuarios = miFirebaseDemoService.listarUsuariosFirebase();
+        ///usuarios = miFirebaseDemoService.ordenarListaUsuarios(usuarios, ordenadosPor);
         ResponseEntity response = new ResponseEntity(usuarios, HttpStatus.OK);
         return response;
     }
@@ -62,29 +72,29 @@ public class DemoController {
     public ResponseEntity<Void> modificarDetalleDeUsuario (@PathVariable String idUsuario, 
                             @PathVariable String nuevoDetalle, 
                             @RequestBody UsuarioDTO usuarioDTO){
-        ///Usuario usuario = miServicio.modificarUsuario(idUsuario, nuevoDetalle);
-        Usuario usuario = this.usuarioMapper.comoUsuario(usuarioDTO, nuevoDetalle);
-        Boolean b = miFirebaseDemoService.modificarUsuarioFirebase(idUsuario, usuario);
-        if( b == true){
-            return ResponseEntity.noContent().build();
-        }
-        else{
-            ResponseEntity responseEntity = new ResponseEntity("Imposible actualizar, el elemento no existe.", 
-                                                            HttpStatus.BAD_REQUEST);
-            return responseEntity;
-        }
-        
+        Usuario usuario = miServicio.modificarUsuario(Long.valueOf(idUsuario), nuevoDetalle);
+        ///Usuario usuario = this.usuarioMapper.comoUsuario(usuarioDTO, nuevoDetalle);
+        ///Boolean b = miFirebaseDemoService.modificarUsuarioFirebase(idUsuario, usuario);
+        ///if( b == true){
+        ///    return ResponseEntity.noContent().build();
+        ////}
+        ///else{
+        ///    ResponseEntity responseEntity = new ResponseEntity("Imposible actualizar, el elemento no existe.", 
+        ///                                                    HttpStatus.BAD_REQUEST);
+        ///    return responseEntity;
+        ///}
+        return ResponseEntity.noContent().build();
     }
 
     // Llamada DELETE: elimina un usuario con llamada HTTP tipo POST.
     @PostMapping("/eliminarUsuario/{id}")
     public ResponseEntity<Void> eliminarUsuario (@PathVariable String id){
         
-        ///Long idUserEliminado = miServicio.eliminarUsuarioPorId(id);
-        Boolean b = miFirebaseDemoService.eliminarUsuarioPorIdFirebase(id);
-        if (b != null){
-            return ResponseEntity.noContent().build();
-        }
+        Long idUserEliminado = miServicio.eliminarUsuarioPorId(Long.valueOf(id));
+        ///Boolean b = miFirebaseDemoService.eliminarUsuarioPorIdFirebase(id);
+        ///if (b != null){
+        ///    return ResponseEntity.noContent().build();
+        //7}
 
         return ResponseEntity.notFound().build();
     }
