@@ -4,25 +4,31 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/tuusuario/tu-repo.git'
+                git 'https://github.com/juanantoniotora/TFM_IngenieriaDeTelecomunicacion.git'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'mvn clean package -DskipTests'
+                dir('demo') {
+                    sh 'mvn clean package -DskipTests'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                sh 'mvn test'
+                dir('demo') {
+                    sh 'mvn test'
+                }
             }
         }
 
         stage('Run') {
             steps {
-                sh 'java -jar target/*.jar &'
+                dir('demo') {
+                    sh 'java -jar target/*.jar &'
+                }
             }
         }
     }
