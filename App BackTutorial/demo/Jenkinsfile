@@ -10,7 +10,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                dir('App BackTutorial\demo') {
+                dir('App BackTutorial/demo') {
                     sh 'mvn clean package -DskipTests'
                 }
             }
@@ -18,7 +18,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                dir('App BackTutorial\demo') {
+                dir('App BackTutorial/demo') {
                     sh 'mvn test'
                 }
             }
@@ -26,9 +26,16 @@ pipeline {
 
         stage('Run') {
             steps {
-                dir('App BackTutorial\demo') {
+                dir('App BackTutorial/demo') {
                     sh 'java -jar target/*.jar &'
                 }
+            }
+        }
+
+        stage('Debug') {
+            steps {
+                sh 'ls -la'
+                sh 'ls -la "App BackTutorial/demo"'
             }
         }
     }
