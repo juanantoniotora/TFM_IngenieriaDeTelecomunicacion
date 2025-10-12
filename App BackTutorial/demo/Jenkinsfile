@@ -24,18 +24,19 @@ pipeline {
             }
         }
 
+        
+        stage('Debug') {
+            steps {
+                sh 'ls -la'
+                sh 'ls -la "App BackTutorial/demo"'
+            }
+        }
+
         stage('Run') {
             steps {
                 dir('App BackTutorial/demo') {
                     sh 'java -jar target/demo-0.0.1-SNAPSHOT.jar'
                 }
-            }
-        }
-
-        stage('Debug') {
-            steps {
-                sh 'ls -la'
-                sh 'ls -la "App BackTutorial/demo"'
             }
         }
     }
