@@ -42,7 +42,6 @@ class DemoControllerTest {
 	@Spy
     UsuarioMapper usuarioMapper;
 	
-
 	UsuarioDTO usuarioDTO = new UsuarioDTO();
 
 	Usuario usuario = new Usuario();
