@@ -5,14 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.dto.UsuarioDTO;
 import com.example.demo.mapper.UsuarioMapper;
@@ -21,8 +14,6 @@ import com.example.demo.service.DemoService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-//import com.example.demo.service.FirebaseDemoService;
 
 @RestController
 @RequestMapping("/")
@@ -33,9 +24,6 @@ public class DemoController {
     @Autowired
     DemoService miServicio;                                  // Servicio sin constructor
     DemoService miServicioConConstructor = new DemoService();// Servicio con constructor
-
-    //@Autowired
-    //private FirebaseDemoService miFirebaseDemoService;
 
     @Autowired
     UsuarioMapper usuarioMapper;                             // Componente sin constructor
@@ -49,8 +37,6 @@ public class DemoController {
         
         Usuario usuario = this.usuarioMapper.comoUsuario(usuarioDTO, detalleUsuario);
         Long idNuevoUsuario = this.miServicio.crearUsuario(usuario);
-        //Long response = miFirebaseDemoService.crearUsuarioFirebase(usuario);
-        //return idNuevoUsuario;
 
         this.logger.info("FIN [DemoController.crearUsuario] Creando usuario.");
         return new ResponseEntity(idNuevoUsuario, HttpStatus.OK );
@@ -59,44 +45,50 @@ public class DemoController {
     // Llamada READ: lee todos los usuarios, con llamada HTTP tipo GET.
     @GetMapping
     public ResponseEntity<List<Usuario>> mostrarTodosLosUsuarios (@RequestParam String ordenadosPor){
-    
+        this.logger.info("INICIO [DemoController.mostrarTodosLosUsuarios] mostrando todos los usuarios.");
+
         List<Usuario> usuarios = miServicio.devolverTodosLosUsuarios();
-        ///List<Usuario> usuarios = miFirebaseDemoService.listarUsuariosFirebase();
-        ///usuarios = miFirebaseDemoService.ordenarListaUsuarios(usuarios, ordenadosPor);
-        ResponseEntity response = new ResponseEntity(usuarios, HttpStatus.OK);
+        final ResponseEntity<List<Usuario>> response = ResponseEntity.ok(usuarios);
+
+        this.logger.info("FIN [DemoController.mostrarTodosLosUsuarios] mostrando todos los usuarios.");
+        return response;
+    }
+
+    // Llamada READ: trae solo un usuario por ID
+    @GetMapping("mostrarUsuario/{userId}")
+    public ResponseEntity<Usuario> mostrarUsuario(@PathVariable Integer userId){
+        this.logger.info("INICIO [DemoController.mostrarUsuario] mostrando el usuario concreto por ID.");
+
+        Usuario usuario = miServicio.devolverUsuarioPorId(userId);
+        final ResponseEntity<Usuario> response = ResponseEntity.ok(usuario);
+
+        this.logger.info("INICIO [DemoController.mostrarUsuario] mostrando el usuario concreto por ID.");
         return response;
     }
 
     // Llamada UPDATE: modifica un usuario con llamada HTTP tipo PUT.
     @PutMapping("/modificarDetalleUsuario/{idUsuario}/{nuevoDetalle}")
     public ResponseEntity<Void> modificarDetalleDeUsuario (@PathVariable String idUsuario, 
-                            @PathVariable String nuevoDetalle, 
-                            @RequestBody UsuarioDTO usuarioDTO){
+                            @PathVariable String nuevoDetalle){
+        this.logger.info("INICIO [DemoController.modificarDetalleDeUsuario] modificando detalles de usuarios.");
         Usuario usuario = miServicio.modificarUsuario(Long.valueOf(idUsuario), nuevoDetalle);
-        ///Usuario usuario = this.usuarioMapper.comoUsuario(usuarioDTO, nuevoDetalle);
-        ///Boolean b = miFirebaseDemoService.modificarUsuarioFirebase(idUsuario, usuario);
-        ///if( b == true){
-        ///    return ResponseEntity.noContent().build();
-        ////}
-        ///else{
-        ///    ResponseEntity responseEntity = new ResponseEntity("Imposible actualizar, el elemento no existe.", 
-        ///                                                    HttpStatus.BAD_REQUEST);
-        ///    return responseEntity;
-        ///}
+        this.logger.info("FIN [DemoController.modificarDetalleDeUsuario] modificando detalles de usuarios.");
         return ResponseEntity.noContent().build();
     }
 
     // Llamada DELETE: elimina un usuario con llamada HTTP tipo POST.
-    @PostMapping("/eliminarUsuario/{id}")
-    public ResponseEntity<Void> eliminarUsuario (@PathVariable String id){
-        
+    @DeleteMapping("/eliminarUsuario/{id}")
+    public ResponseEntity<Void> eliminarUsuario(@PathVariable String id){
+        this.logger.info("INICIO [DemoController.eliminarUsuario] Eliminando usuario por su ID.");
         Long idUserEliminado = miServicio.eliminarUsuarioPorId(Long.valueOf(id));
-        ///Boolean b = miFirebaseDemoService.eliminarUsuarioPorIdFirebase(id);
-        ///if (b != null){
-        ///    return ResponseEntity.noContent().build();
-        //7}
-
-        return ResponseEntity.notFound().build();
+        if(idUserEliminado!=null){
+            this.logger.info("FIN [DemoController.eliminarUsuario] Eliminando usuario por su ID.");
+            return ResponseEntity.noContent().build();
+        }
+        else {
+            this.logger.error("ERROR [DemoController.eliminarUsuario] No se ha encontrado el ID {} en BBDD.", id);
+            return ResponseEntity.notFound().build();
+        }
     }
 
     /************************** PRUEBAS EXTRA ***************************************

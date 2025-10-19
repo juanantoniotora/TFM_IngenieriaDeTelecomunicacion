@@ -1,0 +1,5 @@
+sql:
+  findAllUsers: >
+    SELECT *
+    FROM usuario
+    WHERE id = :id;

@@ -7,6 +7,7 @@ import com.example.demo.entity.UsuariosEntity;
 import com.example.demo.mapper.UsuarioEntityMapper;
 import com.example.demo.model.Usuario;
 import com.example.demo.repository.UsuariosRepository;
+import com.example.demo.repository.UsuariosRepositoryJDBCImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ public class DemoService {
     
     @Autowired
     UsuariosRepository usuariosRepository;
+
+    @Autowired
+    UsuariosRepositoryJDBCImpl usuariosRepositoryJDBCImpl;
 
     @Autowired
     private UsuarioEntityMapper usuarioEntityMapper;
@@ -50,12 +54,19 @@ public class DemoService {
         return usuario.getId();
     }
 
-    // servicio READ
+    // servicio READ TODOS LOS USUARIOS
     public List<Usuario> devolverTodosLosUsuarios(){
         
         List<UsuariosEntity> usuariosEntity = usuariosRepository.findAll();
         List<Usuario> usuarios = usuarioEntityMapper.comoListaDeUsuarios(usuariosEntity);
         return usuarios;
+    }
+
+    // servicio READ SOLO USUARIO UNICO POR ID
+    public Usuario devolverUsuarioPorId(final Integer userId){
+        UsuariosEntity usuarioEntity = usuariosRepositoryJDBCImpl.findUser(userId);
+        Usuario usuario = usuarioEntityMapper.comoUsuario(usuarioEntity);
+        return usuario;
     }
 
     // servicio UPDATE
@@ -98,18 +109,18 @@ public class DemoService {
      ********* Ordenamiento de los usuarios segun valor de RequesParam **************
      ********************************************************************************/
     public List<Usuario> ordenarListaUsuarios (List<Usuario> usuarios, String ordenadosPor){
-        Boolean ordenado = false;
+        Boolean ordenado = (Boolean) false;
         if(ordenadosPor.equals("id")){
             usuarios.sort(Comparator.comparing(Usuario::getId));
-            ordenado = true;
+            ordenado = (Boolean) true;
         }
         if(ordenadosPor.equals("nombre")){
             usuarios.sort(Comparator.comparing(Usuario::getNombre));
-            ordenado = true;
+            ordenado = (Boolean) true;
         }
         if(ordenadosPor.equals("edad")){
             usuarios.sort(Comparator.comparing(Usuario::getEdad));
-            ordenado = true;
+            ordenado = (Boolean) true;
         }
         if(!ordenado){
             usuarios.sort(Comparator.comparing(Usuario::getId));

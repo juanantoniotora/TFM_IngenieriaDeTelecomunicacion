@@ -4,8 +4,11 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 @Entity
+@Table(name = "usuario")
 public class UsuariosEntity {
     
     // fields, getters and setters

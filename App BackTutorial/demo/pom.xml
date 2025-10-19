@@ -91,6 +91,12 @@
 			<scope>runtime</scope>
 		</dependency>
 
+        <!-- Spring Boot JDBC -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+
 		<!-- libreria para conectar con BBDD google Firebase - producto Cloud Firestore -->
 		<!--<dependency>
 			<groupId>com.google.firebase</groupId>

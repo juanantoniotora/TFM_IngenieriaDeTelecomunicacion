@@ -61,21 +61,21 @@ class DemoControllerTest {
 		loggerField.setAccessible(true);
 		loggerField.set(this.demoController, this.logger);
 
-    	this.usuarioDTO.setId(1L); // Ejemplo de ID
+    	this.usuarioDTO.setId(Long.valueOf(1L)); // Ejemplo de ID
 		this.usuarioDTO.setNombre("Juan");
 		this.usuarioDTO.setApellidos("Pérez");
-		this.usuarioDTO.setEdad(30);
+		this.usuarioDTO.setEdad(Integer.valueOf(30));
 		this.usuarioDTO.setActivado(true);
-		this.usuarioDTO.setTelefono(123456789l);
+        this.usuarioDTO.setTelefono(Long.valueOf(123456789l));
 		this.usuarioDTO.setGenero(1);
 		this.usuarioDTO.setAficion("Fútbol");
 
-		this.usuario.setId(1L); // Ejemplo de ID
+		this.usuario.setId(Long.valueOf(1L)); // Ejemplo de ID
 		this.usuario.setNombre("Juan");
 		this.usuario.setApellidos("Pérez");
-		this.usuario.setEdad(30);
+		this.usuario.setEdad(Integer.valueOf(30));
 		this.usuario.setActivado(true);
-		this.usuario.setTelefono(123456789l);
+		this.usuario.setTelefono(Long.valueOf(123456789l));
 		this.usuario.setGenero(1);
 		this.usuario.setAficion("Fútbol");
 	}
@@ -90,7 +90,7 @@ class DemoControllerTest {
 		Assertions.assertEquals("Juan", this.usuarioDTO.getNombre());
 		Assertions.assertEquals("Pérez", this.usuarioDTO.getApellidos());
 		Assertions.assertEquals(30, this.usuarioDTO.getEdad());
-		Assertions.assertEquals(true, this.usuarioDTO.getActivado());
+		Assertions.assertTrue(this.usuarioDTO.getActivado());
 		Assertions.assertEquals(123456789l, this.usuarioDTO.getTelefono());
 		Assertions.assertEquals(1, this.usuarioDTO.getGenero());
 		Assertions.assertEquals("Fútbol", this.usuarioDTO.getAficion());
@@ -109,7 +109,7 @@ class DemoControllerTest {
 	@Test
 	void crearUsuario_DemoController_OK_Test() {
 		Mockito.when(this.usuarioMapper.comoUsuario(usuarioDTO, detalleUsuario)).thenReturn(this.usuario);
-		Mockito.when(this.miServicio.crearUsuario(usuario)).thenReturn(1L);
+		Mockito.when(this.miServicio.crearUsuario(usuario)).thenReturn(Long.valueOf(1L));
 
 		ResponseEntity<Long> result =  this.demoController.crearUsuario(detalleUsuario, usuarioDTO);
 
@@ -133,7 +133,7 @@ class DemoControllerTest {
 	void modificarDetalleDeUsuario_DemoController_OK_Test() {
 		Mockito.when(this.miServicio.modificarUsuario(Long.valueOf(idUsuario), this.nuevoDetalleUsuario)).thenReturn(this.usuario);
 
-		ResponseEntity<Void> result = this.demoController.modificarDetalleDeUsuario(idUsuario, nuevoDetalleUsuario, this.usuarioDTO);
+		ResponseEntity<Void> result = this.demoController.modificarDetalleDeUsuario(idUsuario, nuevoDetalleUsuario);
 
 		Mockito.verify(miServicio).modificarUsuario(Long.valueOf(idUsuario), this.nuevoDetalleUsuario);
 		Assertions.assertEquals(204, result.getStatusCode().value());
@@ -142,11 +142,11 @@ class DemoControllerTest {
 	@Test
 	void eliminarUsuario_DemoController_OK_Test() {
 		String id = "1";
-		Mockito.when(miServicio.eliminarUsuarioPorId(Long.valueOf(id))).thenReturn(1L);
+		Mockito.when(miServicio.eliminarUsuarioPorId(Long.valueOf(id))).thenReturn(Long.valueOf(1L));
 
 		ResponseEntity<Void> result = this.demoController.eliminarUsuario(id);
 
-		Assertions.assertEquals(404, result.getStatusCode().value());
+		Assertions.assertEquals(204, result.getStatusCode().value());
 	}
 
 }
